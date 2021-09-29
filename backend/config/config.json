@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "appuser",
+    "password": "password_here",
+    "database": "appdb_dev",
+    "host": "db.lizardcode.com.ar",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "appuser",
+    "password": null,
+    "database": "appdb_test",
+    "host": "db.lizardcode.com.ar",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "appuser",
+    "password": null,
+    "database": "appdb_production",
+    "host": "db.lizardcode.com.ar",
+    "dialect": "mysql"
+  }
+}
