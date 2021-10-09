@@ -20,8 +20,8 @@ import emergency from "../../dummy_data/images/emergency.png";
 
 const styles = theme => ({
   footerInner: {
-    // backgroundColor: theme.palette.common.darkBlack,
-    backgroundImage: `url(${emergency})`,
+    backgroundColor: theme.palette.primary.main,
+    //backgroundImage: `url(${emergency})`,
     backgroundSize: 'cover',  
     borderRadius: 10 / 2,
     overflow: "hidden",
@@ -47,23 +47,23 @@ const styles = theme => ({
   brandText: {
     fontFamily: "'Baloo Bhaijaan', cursive",
     fontWeight: 400,
-    color: theme.palette.common.white
+    color: theme.palette.secondary.light
   },
   footerLinks: {
     marginTop: theme.spacing(2.5),
     marginBot: theme.spacing(1.5),
-    color: theme.palette.common.white
+    color: theme.palette.secondary.light
   },
   infoIcon: {
-    color: `${theme.palette.common.white} !important`,
-    backgroundColor: "#33383b !important"
+    color: `${theme.palette.primary.main} !important`,
+    backgroundColor: `${theme.palette.secondary.light} !important`
   },
   socialIcon: {
-    fill: theme.palette.common.white,
-    backgroundColor: "#33383b",
+    fill: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.light,
     borderRadius: theme.shape.borderRadius,
     "&:hover": {
-      backgroundColor: theme.palette.primary.light
+      backgroundColor: theme.palette.secondary.main
     }
   },
   link: {
@@ -166,7 +166,7 @@ function Footer(props) {
     <footer className="lg-p-top">
       <WaveBorder
         upperColor="#FFFFFF"
-        lowerColor="#006787"
+        lowerColor={theme.palette.primary.main}
         animationNegativeDelay={4}
       />
       <div className={classes.footerInner}>
@@ -177,30 +177,12 @@ function Footer(props) {
                   <Box mb={1}>
                   <div>
                        <img
-                        src={"https://www.hsr.it/docroot/1.7.0/ospedali/dist/images/hsr_full_white.svg"}
-                        alt="header example"
+                       // src={"https://www.hsr.it/docroot/1.7.0/ospedali/dist/images/hsr_full_white.svg"}
+                        //alt="header example"
                       />
                   </div>
-                    {/* <TextField
-                      variant="outlined"
-                      multiline
-                      placeholder="Get in touch with us"
-                      inputProps={{ "aria-label": "Get in Touch" }}
-                      InputProps={{
-                        className: classes.whiteBg
-                      }}
-                      rows={4}
-                      fullWidth
-                      required
-                    /> */}
+                    
                   </Box>
-                  {/* <ColoredButton
-                    color={theme.palette.common.white}
-                    variant="outlined"
-                    type="submit"
-                  >
-                    Send Message
-                  </ColoredButton> */}
                 </Box>
               </form>
             </Grid>
@@ -224,7 +206,7 @@ function Footer(props) {
                         flexDirection="column"
                         justifyContent="center"
                       >
-                        <Typography variant="h6" className="text-white">
+                        <Typography variant="h6" style={{color: theme.palette.secondary.light}}>
                           {info.description}
                         </Typography>
                       </Box>
