@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Switch, Redirect } from "react-router-dom";
 import PropsRoute from "../../shared/components/PropsRoute";
 import Home from "./home/Home";
+import DetalleIniciativa from "./detalleIniciativa/DetalleIniciativa";
 import QuienesSomos from "./home/quienessomos";
 import Blog from "./blog/Blog";
 import BlogPost from "./blog/BlogPost";
@@ -33,6 +34,7 @@ function Routing(props) {
       />
       )
       <PropsRoute path="/inicio" component={Home} selectHome={selectHome} />)
+      <PropsRoute path="/iniciativa" component={DetalleIniciativa} />)
       <PropsRoute path="/QuienesSomos"
                   component={QuienesSomos} 
                   selectQuienesSomos={selectQuienesSomos} />)
