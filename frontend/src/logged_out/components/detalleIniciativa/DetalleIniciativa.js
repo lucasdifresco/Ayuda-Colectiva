@@ -1,9 +1,18 @@
 import React, { Fragment, useEffect } from "react";
-import { Grid, Typography, Card, Link, Button, Paper, withStyles, withWidth} from "@material-ui/core";
+import { 
+  Grid, 
+  Typography,
+  Link, 
+  Button, 
+  Card, 
+  withStyles, 
+  withWidth, 
+  Box
+} from "@material-ui/core";
 // > Formulario
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import classNames from "classnames";
+import { borderRadius } from "@material-ui/system";
 // < Formulario
 
 const theme = {
@@ -11,19 +20,38 @@ const theme = {
 }
 
 const styles = theme =>({
-  columnLeft: {
-    paddingLeft: "64px",
-    paddingRight: "16px",
-  },
-  columnRight: {
-    paddingLeft: "16px",
-    paddingRight: "64px",
-  },
   contentPaddingLg: {
     padding: "0 16px",
     [theme.breakpoints.up('sm')]: {
-      padding: "0 64px",
+      padding: "0 128px",
     },
+  },
+  titleMargin: {
+    margin: "22px 0",
+  },
+  h1Style: {
+    fontSize: '1.8rem',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '2.4rem',
+    },
+    marginBottom: "12px",
+    fontWeight: "500"
+  },
+  h2Style: {
+    fontSize: '1.3rem',
+    fontWeight: "400"
+  },
+  eventStyle: {
+    marginBottom: "24px",
+    fontSize: "0.85rem",
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: "48px",
+      fontSize: '1rem',
+    },
+  },
+  button: { 
+    width: "50%",
+    backgroundColor: theme.palette.primary.light,
   }
 });
 
@@ -33,65 +61,68 @@ function DetalleIniciativa(props) {
 
   return (
     <div className={classes.contentPaddingLg}>
-      <div style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="container-fluid lg-p-top">
-          <Typography variant="h5" align="center">
-           Incendios en El Bolsón
+      <Box style={{ backgroundColor: "#FFFFFF" }} pt={12} pb={8}>
+        <Typography variant="subtitle2" align="center" className={classes.eventStyle}>
+          Incendios en El Bolsón
+        </Typography>
+        <Box>
+          <Typography variant="h1" align="center" className={classes.h1Style} >
+          Donar recursos para la reforestación
           </Typography>
-          <Typography variant="h3" align="center">
-           Donar recursos para la reforestación
+          <Typography variant="subtitle1" align="center">
+          Liderado por <Link href="#">Fundación Vida Silvestre</Link>
           </Typography>
-          <Typography variant="h5" align="center">
-           Liderado por <Link>Fundación Vida Silvestre</Link>
-          </Typography>
-        </div>
-      </div>
+        </Box>
+      </Box>
 
-      <Grid container spacing={5} justify-content="space-around" >
+      <Grid container spacing={6} justify-content="space-around" >
         <Grid item lg={8} xs={12}>
           <div>
             <div>
               <img src="https://cdn.vox-cdn.com/thumbor/kDxyNNdQSrGDEJdCStUpR7ektDk=/1400x788/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19184784/DSC_0180__1_.jpg" 
                   width="100%" />
             </div>
-            <div class="content-fluid">
-              <Typography variant="h5" align="left">
+            <Box mt={4} mb={8}>
+              <Typography variant="h2" align="left" className={classes.h2Style}>
                 Sobre esta iniciativa
                 <br></br>
                 <br></br>
-                <Typography variant="body2" paragraph align="left">
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
-                </Typography>
               </Typography>
-            </div>
-            <div class="content-fluid">
-              <Typography variant="h5" align="left">
+              <Typography variant="body1" paragraph align="left">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
+              </Typography>
+            </Box>
+            <Box>
+              <Typography variant="h2" align="left" className={classes.h2Style}>
                 Sobre la organización
                 <br></br>
                 <br></br>
-                <Typography variant="body2" paragraph align="left">
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
-                </Typography>
               </Typography>
-            </div>
+              <Typography variant="body1" paragraph align="left">
+              It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
+              </Typography>
+            </Box>
           </div>
         </Grid>
         
         <Grid item lg={4} xs={12}>
-          <div>
-            <Typography  align="Left">
+          <Box>
+            <Typography variant="h2" align="Left" className={classes.h2Style}>
               ¡Postulate para ayudar!
             </Typography>
-            <Typography  align="Left">
+            <br></br>
+            <Typography align="Left">
               Le enviaremos tus datos a la organización para que se pongan en contacto con vos.
             </Typography>
-            <FormControl>
-              <TextField id="filled-basic" label="Nombre" variant="filled" required size="small" margin="dense" />
+            <Box>
+            <FormControl fullWidth="true">
+              <TextField id="filled-basic" label="Nombre" variant="filled" required size="small" margin="dense"/>
               <TextField id="filled-basic" label="Apellido" variant="filled" required size="small" margin="dense"/>
               <TextField id="filled-basic" label="Dirección de email" variant="filled" required size="small" margin="dense"/>
-              <Button variant="contained" disableElevation>Enviar</Button>
+              <Button variant="contained" disableElevation className={classes.button}>Enviar</Button>
             </FormControl>
-          </div>
+            </Box>
+          </Box>
         </Grid>
       </Grid>
     </div>
