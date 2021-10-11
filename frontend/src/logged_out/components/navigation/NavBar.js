@@ -21,7 +21,7 @@ import NavigationDrawer from "../../../shared/components/NavigationDrawer";
 const styles = theme => ({
   appBar: {
     boxShadow: theme.shadows[6],
-    backgroundColor: theme.palette.common.white
+    backgroundColor: theme.palette.primary.main
   },
   toolbar: {
     display: "flex",
@@ -29,7 +29,8 @@ const styles = theme => ({
   },
   menuButtonText: {
     fontSize: theme.typography.body1.fontSize,
-    fontWeight: theme.typography.h6.fontWeight
+    fontWeight: theme.typography.h6.fontWeight,
+    color: "#FFFFFF"
   },
   brandText: {
     fontFamily: "'Baloo Bhaijaan', cursive",
@@ -37,12 +38,13 @@ const styles = theme => ({
   },
   noDecoration: {
     textDecoration: "none !important"
-  }
+  },
 });
 
 function NavBar(props) {
   const {
     classes,
+    theme,
     openRegisterDialog,
     openLoginDialog,
     handleMobileDrawerOpen,
@@ -52,25 +54,20 @@ function NavBar(props) {
   } = props;
   const menuItems = [
     {
-      link: "/inicio",
-      name: "Inicio",
+      link: "/ComoFunciona",
+      name: "Cómo funciona",
       icon: <HomeIcon className="text-white" />
     },
     {
-      link: "/QuienesSomos",
-      name: "Quienes Somos",
+      link: "/Organizaciones",
+      name: "Organizaciones",
       icon: <EventIcon className="text-white" />
     },
-    // {
-    //   link: "/blog",
-    //   name: "Blog",
-    //   icon: <BookIcon className="text-white" />
-    // },
-    {
+    /*{
       name: "Registrarse",
       onClick: openRegisterDialog,
       icon: <HowToRegIcon className="text-white" />
-    },
+    },*/
     {
       name: "Login",
       onClick: openLoginDialog,
@@ -82,22 +79,27 @@ function NavBar(props) {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <div>
-            <Typography
-              variant="h4"
-              className={classes.brandText}
-              display="inline"
-              color="primary"
+            <Link
+              to="/#"
+              className={classes.noDecoration}
             >
-              Consultorio
+              <Typography
+                variant="h4"
+                className={classes.brandText}
+                display="inline"
+                style={{color: theme.palette.secondary.light}}
+              >
+                Ayuda
+              </Typography>
+              <Typography
+                variant="h4"
+                className={classes.brandText}
+                display="inline"
+                style={{color: theme.palette.secondary.main}}
+              >
+                Colectiva
             </Typography>
-            <Typography
-              variant="h4"
-              className={classes.brandText}
-              display="inline"
-              color="secondary"
-            >
-              Raffaele
-            </Typography>
+            </Link>
           </div>
           <div>
             <Hidden mdUp>
@@ -120,7 +122,6 @@ function NavBar(props) {
                       onClick={handleMobileDrawerClose}
                     >
                       <Button
-                        color="secondary"
                         size="large"
                         classes={{ text: classes.menuButtonText }}
                       >
@@ -131,7 +132,7 @@ function NavBar(props) {
                 }
                 return (
                   <Button
-                    color="secondary"
+                    style={{color: theme.palette.secondary.light}}
                     size="large"
                     onClick={element.onClick}
                     classes={{ text: classes.menuButtonText }}
