@@ -51,7 +51,14 @@ const styles = theme =>({
   },
   button: { 
     width: "50%",
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.primary.main,
+    '&:hover': {
+      backgroundColor: theme.palette.primary.dark,
+    },
+    color: '#FFFFFF',
+    fontWeight: '500',
+    margin: 'auto',
+    marginTop: '10px'
   }
 });
 

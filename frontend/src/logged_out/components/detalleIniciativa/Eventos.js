@@ -38,10 +38,14 @@ const styles = theme =>({
     height: '100%'
   },
   btnStyle: {
-    backgroundColor: '#8DD580',
-    "&:hover": {
-      backgroundColor: "#5BA353"
+    backgroundColor: theme.palette.primary.main,
+    '&:hover': {
+      backgroundColor: theme.palette.primary.dark,
     },
+    color: '#FFFFFF',
+    fontWeight: '500',
+    margin: 'auto',
+    marginTop: '10px'
   }
 });
 
