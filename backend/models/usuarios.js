@@ -1,7 +1,11 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-class modelo extends Model { };
+  class modelo extends Model {
+    static associate(models) {
+      modelo.belongsTo(models.roles, { as: 'roles', foreignKey: 'rol' })
+    }
+};
   modelo.init({
     id: {
       primaryKey: true,
@@ -17,7 +21,6 @@ class modelo extends Model { };
       type: DataTypes.STRING
     },
     rol: {
-      foreignKey: 'roles',
       allowNull: false,
       type: DataTypes.INTEGER
     },

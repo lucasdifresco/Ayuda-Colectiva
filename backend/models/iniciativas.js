@@ -1,7 +1,12 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-class modelo extends Model { };
+  class modelo extends Model {
+    static associate(models) {
+      modelo.belongsTo(models.perfilOrganizaciones, { as: 'perfilOrganizaciones', foreignKey: 'organizacion' })
+      modelo.belongsTo(models.eventos, { as: 'eventos', foreignKey: 'evento' })
+    }
+  };
   modelo.init({
     id: {
       primaryKey: true,
@@ -21,12 +26,10 @@ class modelo extends Model { };
       type: DataTypes.BOOLEAN
     },
     organizacion: {
-      foreignKey: 'perfilOrganizaciones',
       allowNull: false,
       type: DataTypes.INTEGER
     },
     evento: {
-      foreignKey: 'eventos',
       allowNull: false,
       type: DataTypes.INTEGER
     }

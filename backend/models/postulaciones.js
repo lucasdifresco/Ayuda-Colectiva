@@ -1,7 +1,12 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-class modelo extends Model { };
+  class modelo extends Model {
+    static associate(models) {
+      modelo.belongsTo(models.perfilDonantes, { as: 'perfilDonantes', foreignKey: 'donante' })
+      modelo.belongsTo(models.iniciativas, { as: 'iniciativas', foreignKey: 'iniciativa' })
+    }
+  };
   modelo.init({
     id: {
       primaryKey: true,
@@ -13,12 +18,10 @@ class modelo extends Model { };
       type: DataTypes.DATE
     },
     donante: {
-      foreignKey: 'perfilDonantes',
       allowNull: false,
       type: DataTypes.INTEGER
     },
     iniciativa: {
-      foreignKey: 'iniciativas',
       allowNull: false,
       type: DataTypes.INTEGER
     }
