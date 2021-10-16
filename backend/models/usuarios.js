@@ -1,18 +1,26 @@
 'use strict';
 const { Model } = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
-class modelo extends Model { static associate(models) { } };
+class modelo extends Model { };
   modelo.init({
     id: {
       primaryKey: true,
       allowNull: false,
       type: DataTypes.INTEGER
     },
-    tipo: {
+    email: {
       allowNull: false,
       type: DataTypes.STRING
-    }
-  }, { sequelize, modelName: 'roles' });
+    },
+    password: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    rol: {
+      foreignKey: 'roles',
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+  }, { sequelize, modelName: 'usuarios' });
   return modelo;
 };
