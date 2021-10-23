@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const Sequelize = require('sequelize');
 const db = require('../models');
 const users = db.users;
 const patients = db.patients;
@@ -13,7 +12,7 @@ const hashPasswordAsync = async password => {
 }
 
 module.exports = {
-    create(req, res)
+    crear(req, res)
     {
         return users
             .create({
@@ -36,7 +35,7 @@ module.exports = {
             })
             .catch( error => res.status(400).send({message: 'Error al crear el usuario: ${err}'}))
     },
-    update (req, res) {
+    modificar (req, res) {
         return users
             .findOne({ where: { id: req.body.user_id } })
             .then(user => { 
@@ -48,7 +47,7 @@ module.exports = {
             })
             .catch(error => res.status(400).send(error))
     },
-    disable (req, res) {
+    autenticar (req, res) {
         return users
             .findOne({ where: { id: req.body.user_id } })
             .then(user => { 
@@ -58,68 +57,5 @@ module.exports = {
                     .catch(error => res.status(400).send(error))
             })
             .catch(error => res.status(400).send(error))
-    },
-    list (_, res) {
-        return users
-            .findAll({})
-            .then(users => res.status(200).send(users))
-            .catch(error => res.status(400).send(error))
-    },
-    find (req, res) {
-        return users
-            .findAll({ where: { email: req.params.email } })
-            .then(users => res.status(200).send(users))
-            .catch(error => res.status(400).send(error))
-    },
-    listByRole (req, res) {
-        return users
-            .findAll({ where: { role_id: req.params.role, } })
-            .then(users => res.status(200).send(users))
-            .catch(error => res.status(400).send(error))
-    },
-    login (req, res) {
-        return users
-            .findOne({
-                where: {
-                    email: req.body.email,
-                    password: req.body.password
-                }
-            })
-            .then(user => {
-                if(user.role_id == PACIENTE){
-                    patients.findOne({
-                        where: {
-                            user_id: user.id
-                        }
-                    })
-                    .then(patient => {
-                        let token = service.createToken(user, patient.id);
-                        let response = {
-                            token: token,
-                            user: {
-                                user_id: user.id,
-                                patient_id: patient.id,
-                                email: user.email,
-                                role_id: user.role_id
-                            }
-                        }
-                        return res.status(200).send(response);
-                    })
-                    .catch(error => res.status(400).send(error));
-                } else {
-                    let token = service.createToken(user, null);
-                    let response = {
-                        token: token,
-                        user: {
-                            user_id: user.id,
-                            patient_id: null,
-                            email: user.email,
-                            role_id: user.role_id
-                        }
-                    }
-                    return res.status(200).send(response);
-                }
-            })
-            .catch(error => res.status(400).send(error))
-    },
+    }
 }

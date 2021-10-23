@@ -1,5 +1,6 @@
+/*
 const Sequelize = require('sequelize');
-const db = require('../models');
+const db = require('../models/OldModels');
 const antecedentes = db.hist_clinica_antecedentes;
 const antecedentesFamiliares = db.hist_clinica_antecedentes_familiares;
 const patologias = db.hist_clinica_patologias;
@@ -8,9 +9,7 @@ const info = db.hist_clinica_info;
 const enfermedades = db.hist_clinica_enfermedades;
 
 module.exports = {
-    /**
-     * Historia Clinica Create
-     */
+
     createAntecedentes (req, res) {
         return antecedentes
             .create({
@@ -86,11 +85,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * 
-     * Updates
-     * 
-     */
+
     updateAntecedentes (req, res) {
         
         return antecedentes
@@ -197,9 +192,7 @@ module.exports = {
             .catch(error => res.status(400).send(error));
     },
 
-    /*
-     * Get hist clinica
-     */
+
     getHistClinica (req, res) {
         // Buscamos la disponibilidad deseada
         const getAntecedentes = antecedentes.findAll({
@@ -256,3 +249,4 @@ module.exports = {
     },
 
 }
+*/

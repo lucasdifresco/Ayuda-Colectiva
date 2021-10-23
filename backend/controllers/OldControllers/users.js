@@ -1,26 +1,21 @@
+/*
 const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
-const db = require('../models');
+const db = require('../models/OldModels');
 const users = db.users;
 const patients = db.patients;
 const PACIENTE = 3; // Role id del paciente
 const service = require('../services/index.service');
-const email = require('./email');
+const email = require('../email');
 
 const hashPasswordAsync = async password => {
 //	const salt = await bcrypt.genSalt()
-	const hash = await bcrypt.hash(password);/*
-	 * Instead of logging on the console
-	 * you can store the password on the DB
-	 */
 	return hash;
 }
 
 module.exports = {
 
-    /**
-     * Users Create
-     */
+
     create (req, res) {
         // TODO Encriptar password!!! Se puede usar bcrypt, investigar
 
@@ -50,9 +45,7 @@ module.exports = {
             .catch( error => res.status(400).send({message: 'Error al crear el usuario: ${err}'}))
     },
 
-    /**
-     * Users Update
-     */
+
     update (req, res) {
         return users
             .findOne({
@@ -70,9 +63,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * Users Disable
-     */
+
     disable (req, res) {
         return users
             .findOne({
@@ -91,9 +82,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * List of Users
-     */
+
     list (_, res) {
         return users
             .findAll({})
@@ -101,9 +90,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * Find all users by role
-     */
+
     find (req, res) {
         return users
             .findAll({
@@ -115,9 +102,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * list all users by role
-     */
+
     listByRole (req, res) {
         return users
             .findAll({
@@ -129,9 +114,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * login
-     */
+
     login (req, res) {
         return users
             .findOne({
@@ -178,3 +161,4 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 }
+*/

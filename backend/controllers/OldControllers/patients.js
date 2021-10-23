@@ -1,13 +1,11 @@
+/*
 const Sequelize = require('sequelize');
-const db = require('../models');
+const db = require('../models/OldModels');
 const patients = db.patients;
 const users = db.users;
 
 module.exports = {
 
-    /**
-     * Patients Create
-     */
     create (req, res) {
         return patients
             .create({
@@ -21,9 +19,6 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * Patients Update
-     */
     update (req, res) {
         return patients
             .findOne({
@@ -41,9 +36,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * List of Patients
-     */
+
     list (_, res) {
         return patients
             .findAll({
@@ -56,9 +49,6 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * Find a Patients
-     */
     find (req, res) {
         return patients
             .findOne({
@@ -74,3 +64,4 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 }
+*/

@@ -1,17 +1,17 @@
-const users = require('users');
-const patients = require('patients');
+const usuarios = require('usuarios');
+const iniciativas = require('iniciativas');
 const roles = require('roles');
-const features = require('features');
-const permissions = require('permissions');
-const availability = require('availability');
-const appointments = require('appointments');
+const postulaciones = require('postulaciones');
+const orgainzaciones = require('perfilOrganizaciones');
+const donantes = require('perfilDonantes');
+const administradores = require('perfilAdministradores');
 
 module.exports = {
-    users,
-    patients,
+    usuarios,
+    iniciativas,
     roles,
-    permissions,
-    features,
-    availability,
-    appointments
+    postulaciones,
+    orgainzaciones,
+    donantes,
+    administradores
 }

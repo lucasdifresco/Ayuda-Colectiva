@@ -1,14 +1,13 @@
-const {Op, HasOne, HasMany} = require('sequelize');
-const db = require('../models');
+/*
+const { Op, HasOne, HasMany } = require('sequelize');
+const db = require('../../models/OldModels');
 const availability = db.availability;
 const users = db.users;
 const patients = db.patients;
 
 module.exports = {
 
-    /**
-     * Availability Appointment
-     */
+
     create (req, res) {
         // Buscamos la disponibilidad deseada
         const disponibilidad = availability.findOne({
@@ -67,9 +66,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * Find an Appointment by Doctor
-     */
+
     findByDoctor (req, res) {
         return availability
             .findAll({
@@ -95,9 +92,6 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * Find an Appointment by Patient
-     */
     findByPatient (req, res) {
         return availability
             .findAll({
@@ -121,9 +115,7 @@ module.exports = {
                 {console.log( error )})//res.status(400).send(error))
     },
 
-    /**
-     * Check if appoitment exists
-     */
+
     appointmentExists (req, res) {
         return availability
             .findAll({
@@ -161,3 +153,4 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     }
 }
+*/

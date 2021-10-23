@@ -1,10 +1,11 @@
+/*
 const Formidable = require('formidable')
 const Sequelize = require('sequelize');
 const bluebird = require('bluebird')
 var fs = require('fs');
 var fs = bluebird.promisifyAll(require('fs'))
 var {join} = require('path');
-const db = require('../models');
+const db = require('../models/OldModels');
 const upload = db.uploads;
 //const { try } = require('bluebird');
 
@@ -139,3 +140,4 @@ exports.list = function (_, res) {
 		.then(uploads => res.status(200).send(uploads))
 		.catch(error => res.status(400).send(error))
 }
+*/

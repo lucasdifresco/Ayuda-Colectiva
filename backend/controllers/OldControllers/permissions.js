@@ -1,14 +1,13 @@
+/*
 const Sequelize = require('sequelize');
-const db = require('../models');
+const db = require('../models/OldModels');
 const permissions = db.permissions;
-const roles = db.roles;
+const roles = require('../models/roles');
 const features = db.features;
 
 module.exports = {
 
-    /**
-     * Permissions Create
-     */
+
     update (req, res) {
         return permissions
             .findOne({
@@ -30,9 +29,7 @@ module.exports = {
           
     },
 
-    /**
-     * List of Permissions
-     */                  
+                 
     list (_, res) {
         return permissions
             .findAll({})
@@ -40,9 +37,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * Find a Feature
-     */
+
     find (req, res) {
         return permissions
             .findAll({
@@ -58,3 +53,4 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 }
+*/

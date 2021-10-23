@@ -1,12 +1,10 @@
-const {Op} = require('sequelize');
-const db = require('../models');
+/*
+const { Op } = require('sequelize');
+const db = require('../models/OldModels');
 const availability = db.availability;
 
 module.exports = {
 
-    /**
-     * Availability Create
-     */
     create (req, res) {
         // Capturo datos del request
         let dateFrom = req.body.dateFrom;
@@ -74,9 +72,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * List of Availabilities
-     */
+
     list (_, res) {
         return availability
             .findAll({where: {
@@ -88,9 +84,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * Find a Availabilities
-     */
+
     find (req, res) {
         return availability
             .findAll({
@@ -102,9 +96,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * Find availability by doc and date
-     */
+
     findByDate (req, res) {
         return availability
             .findAll({
@@ -117,3 +109,4 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 }
+*/

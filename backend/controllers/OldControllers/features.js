@@ -1,12 +1,11 @@
+/*
 const Sequelize = require('sequelize');
-const db = require('../models');
+const db = require('../models/OldModels');
 const features = db.features;
 
 module.exports = {
 
-    /**
-     * Features Create
-     */
+
     create (req, res) {
         return features
             .create({
@@ -16,9 +15,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * List of Feature
-     */                  
+                
     list (_, res) {
         return features
             .findAll({})
@@ -26,9 +23,7 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 
-    /**
-     * Find a Feature
-     */
+
     find (req, res) {
         return features
             .findAll({
@@ -40,3 +35,4 @@ module.exports = {
             .catch(error => res.status(400).send(error))
     },
 }
+*/

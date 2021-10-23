@@ -1,14 +1,11 @@
+/*
 'use strict';
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class hist_clinica_antecedentes_familiares extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
       // define association here
       hist_clinica_antecedentes_familiares.belongsTo(models.patients, {
@@ -40,3 +37,4 @@ module.exports = (sequelize, DataTypes) => {
   });
   return hist_clinica_antecedentes_familiares;
 };
+*/
