@@ -23,6 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.BOOLEAN
     }
-  }, { sequelize, modelName: 'perfilDonantes' });
+  }, { sequelize, modelName: 'perfilDonantes', timestamps: false });
   return modelo;
 };

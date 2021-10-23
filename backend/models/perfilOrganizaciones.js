@@ -27,6 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DATE
     }
-  }, { sequelize, modelName: 'perfilOrganizaciones' });
+  }, { sequelize, modelName: 'perfilOrganizaciones', timestamps: false });
   return modelo;
 };

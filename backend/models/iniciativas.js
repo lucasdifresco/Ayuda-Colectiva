@@ -34,6 +34,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     }
-  }, { sequelize, modelName: 'iniciativas' });
+  }, { sequelize, modelName: 'iniciativas', timestamps: false });
   return modelo;
 };

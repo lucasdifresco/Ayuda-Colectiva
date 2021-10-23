@@ -14,6 +14,6 @@ class modelo extends Model { static associate(models) { } };
       allowNull: false,
       type: DataTypes.STRING
     }
-  }, { sequelize, modelName: 'roles' });
+  }, { sequelize, modelName: 'roles', timestamps: false });
   return modelo;
 };

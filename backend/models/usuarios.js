@@ -27,6 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     }
-  }, { sequelize, modelName: 'usuarios' });
+  }, { sequelize, modelName: 'usuarios', timestamps: false });
   return modelo;
 };

@@ -19,6 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     }
-  }, { sequelize, modelName: 'perfilAdministradores' });
+  }, { sequelize, modelName: 'perfilAdministradores', timestamps: false });
   return modelo;
 };

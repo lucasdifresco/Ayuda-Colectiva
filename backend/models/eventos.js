@@ -21,6 +21,6 @@ class modelo extends Model { };
       allowNull: false,
       type: DataTypes.BOOLEAN
     }
-  }, { sequelize, modelName: 'eventos' });
+  }, { sequelize, modelName: 'eventos', timestamps: false });
   return modelo;
 };
