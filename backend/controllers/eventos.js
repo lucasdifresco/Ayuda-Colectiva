@@ -1,37 +1,42 @@
 const db = require('../models');
-const donantes = db.perfilDonantes;
+const eventos = db.eventos;
 
 module.exports = {
     crear(req, res) {
-        return donantes
+        return eventos
             .create({
-                nombre: req.body.nombre,
-                apellido: req.body.apellido,
-                validacion: true,
+                titulo: req.body.titulo,
+                estado: req.body.estado,
+                descripcion: req.body.descripcion,
             })
             .then(result => res.status(200).send(result))
             .catch(error => res.status(400).send(error))
     },
-    validar(req, res) {
-        return donantes
+    modificar(req, res) {
+        return eventos
             .findOne({ where: { id: req.body.id } })
             .then(result => {
                 result
-                    .update({ validacion: req.body.validacion })
+                    .update({ titulo: req.body.titulo, descripcion: req.body.descripcion })
                     .then(result => res.status(200).send(result))
                     .catch(error => res.status(400).send(error))
             })
             .catch(error => res.status(400).send(error))
     },
-    ver(req, res) {
-        return donantes
+    cambiarEstado(req, res) {
+        return eventos
             .findOne({ where: { id: req.body.id } })
-            .then(result => res.status(200).send(result))
+            .then(result => {
+                result
+                    .update({ estado: req.body.estado })
+                    .then(result => res.status(200).send(result))
+                    .catch(error => res.status(400).send(error))
+            })
             .catch(error => res.status(400).send(error))
     },
-    listarPorValidacion(req, res) {
-        return donantes
-            .findAll({ where: { validacion: req.body.validacion } })
+    listar(req, res) {
+        return eventos
+            .findAll()
             .then(result => res.status(200).send(result))
             .catch(error => res.status(400).send(error))
     }

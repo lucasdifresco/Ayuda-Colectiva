@@ -1,61 +1,45 @@
-const bcrypt = require('bcrypt');
 const db = require('../models');
-const users = db.users;
-const patients = db.patients;
-const PACIENTE = 3; // Role id del paciente
-const service = require('../services/index.service');
-const email = require('./email');
-
-const hashPasswordAsync = async password => {
-	const hash = await bcrypt.hash(password);
-	return hash;
-}
+const usuarios = db.usuarios;
+const administradores = db.perfilAdministradores;
+const organizaciones = db.perfilOrganizaciones;
+const donantes = db.perfilDonantes;
 
 module.exports = {
     crear(req, res)
     {
-        return users
+        var user;
+        switch (req.body.rol)
+        {
+            case 0: user = administradores.crear(req, res); break;
+            case 1: user = organizaciones.crear(req, res); break;
+            case 2: user = donantes.crear(req, res); break;
+        }
+        
+        return usuarios
             .create({
-                role_id: req.body.role_id,
                 email: req.body.email,
                 password: req.body.password,
-                status: req.body.status
+                rol: req.body.rol,
+                id: user.id
             })
-            .then(users => {
-                email.enviarMail(users.email);  
-                if(users.role_id == PACIENTE) {
-                    return patients
-                        .create({
-                            user_id: users.id,
-                            dni: req.body.dni
-                        })
-                        .then(patient => res.status(200).send(patient))
-                        .catch(error => res.status(400).send(error));
-                } else { return res.status(200).send({ token: service.createToken(users) });  }
-            })
-            .catch( error => res.status(400).send({message: 'Error al crear el usuario: ${err}'}))
+            .then( result => res.status(200).send(result))
+            .catch( error => res.status(400).send(error))
     },
     modificar (req, res) {
-        return users
-            .findOne({ where: { id: req.body.user_id } })
-            .then(user => { 
-                delete req.body.user_id;
-                user
-                    .update(req.body)
-                    .then(user => res.status(200).send(user))
+        return usuarios
+            .findOne({ where: { id: req.body.id } })
+            .then(usuario => { 
+                usuario
+                    .update({ password:req.body.password })
+                    .then(result => res.status(200).send(result))
                     .catch(error => res.status(400).send(error))
             })
             .catch(error => res.status(400).send(error))
     },
     autenticar (req, res) {
-        return users
-            .findOne({ where: { id: req.body.user_id } })
-            .then(user => { 
-                user
-                    .update({ status: 0 })
-                    .then(user => res.status(200).send(user))
-                    .catch(error => res.status(400).send(error))
-            })
+        return usuarios
+            .findOne({ where: { id: req.body.id } })
+            .then(result => res.status(200).send(result))
             .catch(error => res.status(400).send(error))
     }
 }
