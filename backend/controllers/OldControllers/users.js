@@ -117,19 +117,10 @@ module.exports = {
 
     login (req, res) {
         return users
-            .findOne({
-                where: {
-                    email: req.body.email,
-                    password: req.body.password
-                }
-            })
+            .findOne({ where: { email: req.body.email, password: req.body.password } })
             .then(user => {
                 if(user.role_id == PACIENTE){
-                    patients.findOne({
-                        where: {
-                            user_id: user.id
-                        }
-                    })
+                    patients.findOne({ where: { user_id: user.id } })
                     .then(patient => {
                         let token = service.createToken(user, patient.id);
                         let response = {

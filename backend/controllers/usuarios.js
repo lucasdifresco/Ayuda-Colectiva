@@ -1,3 +1,5 @@
+var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
 const db = require('../models');
 const usuarios = db.usuarios;
 const administradores = db.perfilAdministradores;
@@ -10,15 +12,16 @@ module.exports = {
         var user;
         switch (req.body.rol)
         {
-            case 0: user = administradores.crear(req, res); break;
-            case 1: user = organizaciones.crear(req, res); break;
-            case 2: user = donantes.crear(req, res); break;
+            case process.env.ROL_ADMINISTRADOR: user = administradores.crear(req, res); break;
+            case process.env.ROL_ORGANIZACION: user = organizaciones.crear(req, res); break;
+            case process.env.ROL_DONANTE: user = donantes.crear(req, res); break;
+            default: return;
         }
-        
+        var hashedPassword = bcrypt.hashSync(req.body.password, 8);
         return usuarios
             .create({
                 email: req.body.email,
-                password: req.body.password,
+                password: hashedPassword,
                 rol: req.body.rol,
                 id: user.id
             })
@@ -28,9 +31,10 @@ module.exports = {
     modificar (req, res) {
         return usuarios
             .findOne({ where: { id: req.body.id } })
-            .then(usuario => { 
+            .then(usuario => {
+                var hashedPassword = bcrypt.hashSync(req.body.password, 8);
                 usuario
-                    .update({ password:req.body.password })
+                    .update({ password: hashedPassword })
                     .then(result => res.status(200).send(result))
                     .catch(error => res.status(400).send(error))
             })
@@ -39,7 +43,12 @@ module.exports = {
     autenticar (req, res) {
         return usuarios
             .findOne({ where: { id: req.body.id } })
-            .then(result => res.status(200).send(result))
-            .catch(error => res.status(400).send(error))
+            .then(result => {
+                var passwordIsValid = bcrypt.compareSync(result.password, req.body.password);
+                if (!passwordIsValid) { res.status(400).send({ message:'Invalid username or pasword.' }) }
+                var token = jwt.sign({ id: result.id, rol: result.rol }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 86400 });
+                return { token: token, user: result };
+            })
+            .catch(error => res.status(400).send({ message: 'Invalid username or pasword.' }))
     }
 }
