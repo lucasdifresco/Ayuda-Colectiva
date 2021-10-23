@@ -4,15 +4,14 @@ module.exports = (sequelize, DataTypes) => {
   class modelo extends Model {
     static associate(models) {
       modelo.belongsTo(models.roles, { as: 'roles', foreignKey: 'rol' })
+      modelo.belongsTo(models.perfilOrganizaciones, { as: 'perfilOrganizaciones', foreignKey: 'id' })
+      modelo.belongsTo(models.perfilAdministradores, { as: 'perfilAdministradores', foreignKey: 'id' })
+      modelo.belongsTo(models.perfilDonantes, { as: 'perfilDonantes', foreignKey: 'id' })
     }
 };
   modelo.init({
-    id: {
-      primaryKey: true,
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
     email: {
+      primaryKey: true,
       allowNull: false,
       type: DataTypes.STRING
     },
@@ -24,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     },
+    id: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    }
   }, { sequelize, modelName: 'usuarios' });
   return modelo;
 };
