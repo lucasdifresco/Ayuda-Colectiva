@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
 class modelo extends Model { };
   modelo.init({
     id: {
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
       type: DataTypes.INTEGER

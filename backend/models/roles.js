@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
 class modelo extends Model { static associate(models) { } };
   modelo.init({
     id: {
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
       type: DataTypes.INTEGER
