@@ -32,7 +32,7 @@ function Main(props) {
   const selectHome = useCallback(() => {
     smoothScrollTop();
     document.title =
-      "Consultorio Raffaele";
+      "AyudaColectiva";
     setSelectedTab("Home");
   }, [setSelectedTab]);
 

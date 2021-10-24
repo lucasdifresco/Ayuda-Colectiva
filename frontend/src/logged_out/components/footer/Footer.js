@@ -83,13 +83,13 @@ const styles = theme => ({
 });
 
 const infos = [
-  {
+ /* {
     icon: <PhoneIcon />,
     description: "07636600962"
-  },
+  },*/
   {
     icon: <MailIcon />,
-    description: "support@company.com"
+    description: "info@ayudacolectiva.com"
   }
 ];
 
