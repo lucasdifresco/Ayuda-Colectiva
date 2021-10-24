@@ -1,25 +1,33 @@
 'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('iniciativas', { 
       id: {
-        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        allowNull: false,
         type: Sequelize.INTEGER
       },
-      username: {
+      titulo: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      email: {
+      descripcion: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      status: {
+      aprobacion: {
         allowNull: false,
-        defaultValue: 1,
-        type: Sequelize.CHAR
+        type: Sequelize.BOOLEAN
+      },
+      organizacion: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      evento: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -31,7 +39,8 @@ module.exports = {
       }
     });
   },
+
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('iniciativas');
   }
 };

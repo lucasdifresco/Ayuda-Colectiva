@@ -1,36 +1,29 @@
 'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('hist_clinica_patologias', {
+    await queryInterface.createTable('perfilOrganizaciones', { 
       id: {
-        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        allowNull: false,
         type: Sequelize.INTEGER
       },
-      patient_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'users',
-          key: 'id'
-        }
-      },
-      doctor_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'users',
-          key: 'id'
-        }
-      },
-      type: {
+      nombre: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      comments: {
+      mision: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
+      },
+      aprobacion: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
+      },
+      fechaDeAlta: {
+        allowNull: false,
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -42,7 +35,8 @@ module.exports = {
       }
     });
   },
+
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('hist_clinica_patologias');
+    await queryInterface.dropTable('perfilOrganizaciones');
   }
 };
