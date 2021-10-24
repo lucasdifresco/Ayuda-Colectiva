@@ -2,12 +2,11 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class modelo extends Model {
-    static associate(models) {
-      modelo.belongsTo(models.usuarios, { as: 'usuarios', foreignKey: 'usuario' })
-    }
+    static associate(models) { }
 };
   modelo.init({
     id: {
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
       type: DataTypes.INTEGER
@@ -19,11 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     apellido: {
       allowNull: false,
       type: DataTypes.STRING
-    },
-    usuario: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
-  }, { sequelize, modelName: 'perfilAdministradores' });
+    }
+  }, { sequelize, modelName: 'perfilAdministradores', timestamps: false });
   return modelo;
 };

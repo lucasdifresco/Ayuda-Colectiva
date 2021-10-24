@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
 class modelo extends Model { static associate(models) { } };
   modelo.init({
     id: {
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
       type: DataTypes.INTEGER
@@ -13,6 +14,6 @@ class modelo extends Model { static associate(models) { } };
       allowNull: false,
       type: DataTypes.STRING
     }
-  }, { sequelize, modelName: 'roles' });
+  }, { sequelize, modelName: 'roles', timestamps: false });
   return modelo;
 };

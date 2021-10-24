@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   modelo.init({
     id: {
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
       type: DataTypes.INTEGER
@@ -25,6 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     }
-  }, { sequelize, modelName: 'postulaciones' });
+  }, { sequelize, modelName: 'postulaciones', timestamps: false });
   return modelo;
 };
