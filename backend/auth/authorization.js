@@ -1,31 +1,44 @@
-/**
- * @type {Module jsonwebtoken|Module jsonwebtoken}
- * @author | Mohammad Raheem
- */
 var jwt = require('jsonwebtoken');
-var config = require('../config').config();
 
-var authorization = function (req, res, next) {
+module.exports = {
+    administrador(req, res, next) {
 
-    var token = req.headers['x-access-token'];
+        var token = req.headers['x-access-token'];
+        if (!token) { res.status(500).send({ auth: false, message: 'No token provided.' }); }
 
-    var msg = {auth: false, message: 'No token provided.'};
-    if (!token)
-        res.status(500).send(msg);
+        let sec = process.env.ACCESS_TOKEN_SECRET;
+        jwt.verify(token, sec, function (err, decoded) {
+            if (err || decoded.rol != process.env.ROL_ADMINISTRADOR) { res.status(500).send({ auth: false, message: 'Failed to authenticate token.' }); }
+            req.id = decoded.id;
+            req.rol = decoded.rol;
+            next();
+        });
+    },
+    organizacion(req, res, next) {
 
-    let sec = process.env.ACCESS_TOKEN_SECRET;
+        var token = req.headers['x-access-token'];
+        if (!token) { res.status(500).send({ auth: false, message: 'No token provided.' }); }
 
-    jwt.verify(token, sec, function (err, decoded) {
-        var msg = {auth: false, message: 'Failed to authenticate token.'};
-        if (err)
-            res.status(500).send(msg);
+        let sec = process.env.ACCESS_TOKEN_SECRET;
+        jwt.verify(token, sec, function (err, decoded) {
+            if (err || decoded.rol != process.env.ROL_ORGANIZACION) { res.status(500).send({ auth: false, message: 'Failed to authenticate token.' }); }
+            req.id = decoded.id;
+            req.rol = decoded.rol;
+            next();
+        });
+    },
+    donante(req, res, next) {
 
-        var dec = jwt.decode(token, {complete: true});
+        var token = req.headers['x-access-token'];
+        if (!token) { res.status(500).send({ auth: false, message: 'No token provided.' }); }
 
-        req.userId = dec.payload.user_id;
-        next();
-    });
-}
-
-module.exports = authorization;
+        let sec = process.env.ACCESS_TOKEN_SECRET;
+        jwt.verify(token, sec, function (err, decoded) {
+            if (err || decoded.rol != process.env.ROL_DONANTE) { res.status(500).send({ auth: false, message: 'Failed to authenticate token.' }); }
+            req.id = decoded.id;
+            req.rol = decoded.rol;
+            next();
+        });
+    }
+};
 

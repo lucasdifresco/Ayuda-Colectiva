@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   modelo.init({
     id: {
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
       type: DataTypes.INTEGER
@@ -33,6 +34,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     }
-  }, { sequelize, modelName: 'iniciativas' });
+  }, { sequelize, modelName: 'iniciativas', timestamps: false });
   return modelo;
 };

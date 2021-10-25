@@ -2,12 +2,11 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class modelo extends Model {
-    static associate(models) {
-      modelo.belongsTo(models.usuarios, { as: 'usuarios', foreignKey: 'usuario' })
-    }
+    static associate(models) { }
  };
   modelo.init({
     id: {
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
       type: DataTypes.INTEGER
@@ -23,11 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     validacion: {
       allowNull: false,
       type: DataTypes.BOOLEAN
-    },
-    usuario: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
-  }, { sequelize, modelName: 'perfilDonantes' });
+    }
+  }, { sequelize, modelName: 'perfilDonantes', timestamps: false });
   return modelo;
 };
