@@ -10,20 +10,20 @@ module.exports = {
     crear(req, res)
     {
         var user;
-        switch (req.body.rol)
+       /* switch (req.body.rol)
         {
             case process.env.ROL_ADMINISTRADOR: user = administradores.crear(req, res); break;
             case process.env.ROL_ORGANIZACION: user = organizaciones.crear(req, res); break;
             case process.env.ROL_DONANTE: user = donantes.crear(req, res); break;
             default: return;
-        }
+        } */
         var hashedPassword = bcrypt.hashSync(req.body.password, 8);
         return usuarios
             .create({
                 email: req.body.email,
                 password: hashedPassword,
                 rol: req.body.rol,
-                id: user.id
+                id: 0,
             })
             .then( result => res.status(200).send(result))
             .catch( error => res.status(400).send(error))

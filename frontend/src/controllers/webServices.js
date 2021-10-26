@@ -4,13 +4,13 @@ const urlWebServices = {
     /*
      * Users
      */ 
-    createUsers: rutaBack + "api/user/create",
-    updateUsers: rutaBack + "api/user/update",
-    deleteUsers: rutaBack + "api/user/disable",
-    listUsers: rutaBack + "api/user/list",
-    loginUser: rutaBack + "api/user/login",
-    findUserByEmail: rutaBack + "api/user/find/email/",
-    listUsersByRole: rutaBack + "api/user/list/role/",
+    createUsers: rutaBack + "api/usuarios/crear",
+    updateUsers: rutaBack + "api/usuarios/modificar",
+    deleteUsers: rutaBack + "api/usuarios/disable",
+    listUsers: rutaBack + "api/usuarios/list",
+    loginUser: rutaBack + "api/usuarios/autenticar",
+    findUserByEmail: rutaBack + "api/usuarios/find/email/",
+    listUsersByRole: rutaBack + "api/usuarios/list/role/",
 
     /*
      * Roles
