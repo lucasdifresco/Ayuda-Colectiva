@@ -5,18 +5,19 @@ const usuarios = db.usuarios;
 const administradores = db.perfilAdministradores;
 const organizaciones = db.perfilOrganizaciones;
 const donantes = db.perfilDonantes;
+require('dotenv').config();
 
 module.exports = {
     crear(req, res)
     {
         var user;
-       /* switch (req.body.rol)
+        switch (req.body.rol)
         {
             case process.env.ROL_ADMINISTRADOR: user = administradores.crear(req, res); break;
             case process.env.ROL_ORGANIZACION: user = organizaciones.crear(req, res); break;
             case process.env.ROL_DONANTE: user = donantes.crear(req, res); break;
             default: return;
-        } */
+        }
         var hashedPassword = bcrypt.hashSync(req.body.password, 8);
         return usuarios
             .create({
@@ -42,9 +43,9 @@ module.exports = {
     },
     autenticar (req, res) {
         return usuarios
-            .findOne({ where: { id: req.body.id } })
+            .findOne({ where: { email: req.body.email } })
             .then(result => {
-                var passwordIsValid = bcrypt.compareSync(result.password, req.body.password);
+                var passwordIsValid = bcrypt.compareSync(req.body.password, result.password);
                 if (!passwordIsValid) { res.status(400).send({ message:'Invalid username or pasword.' }) }
                 var token = jwt.sign({ id: result.id, rol: result.rol }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 86400 });
                 return { token: token, user: result };
