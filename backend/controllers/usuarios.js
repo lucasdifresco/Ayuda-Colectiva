@@ -5,6 +5,7 @@ const usuarios = db.usuarios;
 const administradores = db.perfilAdministradores;
 const organizaciones = db.perfilOrganizaciones;
 const donantes = db.perfilDonantes;
+require('dotenv').config();
 
 module.exports = {
     crear(req, res)
@@ -23,7 +24,7 @@ module.exports = {
                 email: req.body.email,
                 password: hashedPassword,
                 rol: req.body.rol,
-                id: user.id
+                id: 0,
             })
             .then( result => res.status(200).send(result))
             .catch( error => res.status(400).send(error))
@@ -42,9 +43,9 @@ module.exports = {
     },
     autenticar (req, res) {
         return usuarios
-            .findOne({ where: { id: req.body.id } })
+            .findOne({ where: { email: req.body.email } })
             .then(result => {
-                var passwordIsValid = bcrypt.compareSync(result.password, req.body.password);
+                var passwordIsValid = bcrypt.compareSync(req.body.password, result.password);
                 if (!passwordIsValid) { res.status(400).send({ message:'Invalid username or pasword.' }) }
                 var token = jwt.sign({ id: result.id, rol: result.rol }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 86400 });
                 return { token: token, user: result };

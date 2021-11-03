@@ -53,7 +53,6 @@ function RegisterDialog(props) {
     const usuario ={
       email: mail.current.value,
       password:  registerPassword.current.value,
-      dni: dni.current.value,
       role: 3
     };
 
@@ -89,7 +88,7 @@ function RegisterDialog(props) {
       loading={isLoading}
       onClose={onClose}
       open
-      headline="Registrarse"
+      headline="Registrate para colaborar"
       onFormSubmit={(e) => {
         e.preventDefault();
         register();
@@ -104,7 +103,7 @@ function RegisterDialog(props) {
             required
             fullWidth
             error={status === "invalidEmail"}
-            label="Mail"
+            label="Dirrección de mail"
             autoFocus
             autoComplete="off"
             type="email"
@@ -115,28 +114,6 @@ function RegisterDialog(props) {
               }
             }}
             FormHelperTextProps={{ error: true }}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            inputRef={dni}
-            required
-            fullWidth
-            label="DNI"
-            inputRef={dni}
-            onChange={(e) => {   
-              console.log(e.target.value);
-              if (isNaN(e.target.value)) {
-                e.target.value = "";
-              }
-
-             else if (e.target.value.length > 5) {
-                e.target.value = e.target.value.substring(0,5);
-              }
-            }}
-            autoFocus
-            autoComplete="off"
-            type="text"
           />
           <VisibilityPasswordTextField
             variant="outlined"
@@ -214,7 +191,7 @@ function RegisterDialog(props) {
             }
             label={
               <Typography variant="body1">
-                Estoy de acuerdo con
+                Estoy de acuerdo con los
                 <span
                   className={classes.link}
                   onClick={isLoading ? null : openTermsDialog}
@@ -248,14 +225,10 @@ function RegisterDialog(props) {
               los terminos y condiciones
             </FormHelperText>
           )}
-          {status === "accountCreated" ? (
+          {status === "accountCreated" && (
             <HighlightedInformation>
               La cuenta ha sido creada, porfavor ingrese desde
               el mail que se le envio.
-            </HighlightedInformation>
-          ) : (
-            <HighlightedInformation>
-              No se puede registrar aun.
             </HighlightedInformation>
           )}
         </Fragment>
@@ -271,32 +244,9 @@ function RegisterDialog(props) {
          
           disabled={isLoading}
         >
-          Registrar
+          Registrarme
           {isLoading && <ButtonCircularProgress />}
         </Button>
-        <Typography
-          align="center"
-          className={classNames(
-            classes.link,
-            isLoading ? classes.disabledText : null
-          )}
-          color="primary"
-          onClick={isLoading ? null : openLoginDialog}
-          tabIndex={0}
-          role="button"
-          onKeyDown={(event) => {
-              // For screenreaders listen to space and enter events
-              if (
-                (!isLoading && event.keyCode === 13) ||
-                event.keyCode === 32
-              ) {
-                openLoginDialog();
-              }
-            }
-          }
-        >
-          Ya estás registrado? Ingresa aquí. 
-        </Typography>
       </Fragment>
       }
     />
