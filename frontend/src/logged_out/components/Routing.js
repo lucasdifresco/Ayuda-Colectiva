@@ -9,6 +9,7 @@ import Eventos from "./detalleIniciativa/Eventos";
 import QuienesSomos from "./home/quienessomos";
 import Blog from "./blog/Blog";
 import BlogPost from "./blog/BlogPost";
+import Checkout from "./donacion/Checkout";
 
 function Routing(props) {
   const { blogPosts, selectBlog, selectHome, selectQuienesSomos} = props;
@@ -34,14 +35,16 @@ function Routing(props) {
         selectBlog={selectBlog}
         blogPosts={blogPosts}
       />
-      )
-      <PropsRoute path="/inicio" component={Home} selectHome={selectHome} />)
-      <PropsRoute path="/iniciativa" component={DetalleIniciativa} />)
-      <PropsRoute path="/organizaciones" component={Organizaciones} />)
-      <PropsRoute path="/eventos" component={Eventos} />)
+      
+      <PropsRoute path="/inicio" component={Home} selectHome={selectHome} />
+      <PropsRoute path="/iniciativa" component={DetalleIniciativa} />
+      <PropsRoute path="/organizaciones" component={Organizaciones} />
+      <PropsRoute path="/eventos" component={Eventos} />
       <PropsRoute path="/QuienesSomos"
                   component={QuienesSomos} 
-                  selectQuienesSomos={selectQuienesSomos} />)
+                  selectQuienesSomos={selectQuienesSomos} />
+                  
+      <PropsRoute path="/checkout" component={Checkout}  />
       <Redirect from='*' to='/inicio'/>
     </Switch>
   );

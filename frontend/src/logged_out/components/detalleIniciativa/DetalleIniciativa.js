@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { 
   Grid, 
   Typography,
@@ -11,9 +12,14 @@ import {
 } from "@material-ui/core";
 // > Formulario
 import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
 import TextField from '@material-ui/core/TextField';
-import { borderRadius } from "@material-ui/system";
+import RadioGroup from '@material-ui/core/RadioGroup';
+import { borderRadius, flexbox } from "@material-ui/system";
 // < Formulario
+import { createPreference } from "../../../controllers/api/api.mercadopago";
 
 const theme = {
   spacing: 8,
@@ -50,7 +56,7 @@ const styles = theme =>({
     },
   },
   button: { 
-    width: "50%",
+    maxWidth: "80%",
     backgroundColor: theme.palette.primary.main,
     '&:hover': {
       backgroundColor: theme.palette.primary.dark,
@@ -58,13 +64,77 @@ const styles = theme =>({
     color: '#FFFFFF',
     fontWeight: '500',
     margin: 'auto',
-    marginTop: '10px'
+    marginTop: '10px',
+    display: 'block'
+  },
+  otroContainer: {
+    display: 'flex'
+  },
+  inputMonto: {
+    maxWidth: '100px',
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    marginTop: '0'
+  },
+  radioMonto: {
+    display: 'inline-block'
   }
 });
+
+const defaultValues = {
+  monto: 100,
+  montoPersonalizado: null
+};
 
 function DetalleIniciativa(props) {
   
   const { theme, classes } = props;
+  const history = useHistory();
+  const [formValues, setFormValues] = useState(defaultValues);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    console.log(formValues);
+
+    const orderData = {
+      quantity: 1,
+      description: "Titulo iniciativa",
+      price: formValues.monto
+    };
+
+    if(formValues.montoPersonalizado !== undefined
+      && formValues.montoPersonalizado !== null) {
+      orderData.price = formValues.montoPersonalizado;
+    }
+
+    createPreference(orderData)
+      .then(response => {
+        if (response.success) {
+          console.log(response);
+          history.push(
+            "/checkout",
+            [{
+              preferenceId: response.response.id,
+              preference: orderData
+            }])
+
+        } else {
+          
+          console.log("Error");
+        }
+      });
+   
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+
 
   return (
     <div className={classes.contentPaddingLg}>
@@ -114,20 +184,61 @@ function DetalleIniciativa(props) {
         
         <Grid item lg={4} xs={12}>
           <Box>
-            <Typography variant="h2" align="Left" className={classes.h2Style}>
+            <Typography variant="h2" align="left" className={classes.h2Style}>
+              ¡Colaborá con esta iniciativa!
+            </Typography>
+            <br></br>
+            <Box>
+              <form onSubmit={handleSubmit}>
+                <FormControl component="fieldset" >
+                  <FormLabel component="legend">Seleccioná el monto</FormLabel>
+                  <RadioGroup
+                    aria-label="monto"
+                    defaultValue="100"
+                    name="monto"
+                    onChange={handleInputChange}
+                  >
+                    <FormControlLabel value="100" control={<Radio />} label="$100" />
+                    <FormControlLabel value="500" control={<Radio />} label="$500" />
+                    <div className="otroContainer">
+                      <FormControlLabel value="Otro" control={<Radio />} label="Otro" className={classes.radioMonto}/>
+                      {formValues.monto == "Otro" ? 
+                        <TextField 
+                          id="filled-basic" 
+                          name="montoPersonalizado" 
+                          required 
+                          size="small" 
+                          margin="dense" 
+                          onChange={handleInputChange}
+                          className={classes.inputMonto}
+                          InputProps={{
+                            startAdornment: (
+                              "$"
+                            ),
+                          }}/> 
+                        : null}
+                    </div>
+                  </RadioGroup>
+                </FormControl>
+                <Button variant="contained" disableElevation className={classes.button} type="submit">Colaborar</Button>
+              </form>
+            </Box>
+          </Box>
+          <Box>
+            <Typography variant="h2" align="left" className={classes.h2Style}>
               ¡Postulate para ayudar!
             </Typography>
             <br></br>
-            <Typography align="Left">
+            <Typography align="left">
               Le enviaremos tus datos a la organización para que se pongan en contacto con vos.
             </Typography>
             <Box>
-            <FormControl fullWidth="true">
-              <TextField id="filled-basic" label="Nombre" variant="filled" required size="small" margin="dense"/>
-              <TextField id="filled-basic" label="Apellido" variant="filled" required size="small" margin="dense"/>
-              <TextField id="filled-basic" label="Dirección de email" variant="filled" required size="small" margin="dense"/>
-              <Button variant="contained" disableElevation className={classes.button}>Enviar</Button>
-            </FormControl>
+              <FormControl fullWidth>
+                <TextField id="filled-basic" label="Nombre" variant="filled" required size="small" margin="dense"/>
+                <TextField id="filled-basic" label="Apellido" variant="filled" required size="small" margin="dense"/>
+                <TextField id="filled-basic" label="Dirección de email" variant="filled" required size="small" margin="dense"/>
+                <Button variant="contained" disableElevation className={classes.button}>Enviar</Button>
+              </FormControl>
             </Box>
           </Box>
         </Grid>

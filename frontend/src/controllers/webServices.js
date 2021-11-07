@@ -21,6 +21,11 @@ const urlWebServices = {
     findRoles: rutaBack + "api/role/find/name/",
 
     /*
+     * MercadoPago
+     */
+    createMPPreference: rutaBack + "api/donaciones/crear",
+
+    /*
      * Permissions
      */ 
     updatePermissions: rutaBack + "api/permission/update",
@@ -79,6 +84,7 @@ const urlWebServices = {
     updatePatologia: rutaBack + "api/historia-clinica/update-patologias",
     updateConsulta: rutaBack + "api/historia-clinica/update-consultas",
     getHistoriaClinica: rutaBack + "api/historia-clinica/find/patient/",
+
 }
 
 export default urlWebServices;
