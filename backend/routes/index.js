@@ -2,6 +2,7 @@ const usuariosCTLR = require('../controllers/usuarios');
 const eventosCTLR = require('../controllers/eventos');
 const iniciativasCTLR = require('../controllers/iniciativas');
 const postulacionesCTLR = require('../controllers/postulaciones');
+const mercadopagoAPI = require('../apis/mercadopago');
 
 const auth = require('../auth/authorization');
 
@@ -60,5 +61,8 @@ module.exports = (app) => {
   app.get('/api/iniciativas/listar/evento/:evento', iniciativasCTLR.listarPorEvento);
   app.get('/api/iniciativas/listar/organizacion/:organizacion', iniciativasCTLR.listarPorOrganizacion);
   app.get('/api/iniciativas/listar/aprobacion/:aprobacion', iniciativasCTLR.listarPorAprobacion);
+
+  // MercadoPago
+  app.post('/api/donaciones/crear', mercadopagoAPI.createPreference);
 }
 
