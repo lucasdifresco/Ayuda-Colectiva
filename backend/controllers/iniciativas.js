@@ -1,75 +1,134 @@
 const db = require('../models');
 const iniciativas = db.iniciativas;
+const organizaciones = db.organizaciones;
+const eventos = db.eventos;
 
 module.exports = {
     crear(req, res)
     {
-        return iniciativas
-            .create({
-                titulo: req.body.titulo,
-                aprobacion: false,
-                organizacion: req.body.organizacion,
-                evento: req.body.evento,
-                descripcion: req.body.descripcion,
-            })
-            .then(result => res.status(200).send(result))
-            .catch(error => res.status(400).send(error))
+        var parametros = {
+            titulo: req.body.titulo,
+            organizacion: req.body.idOrganizacion,
+            evento: req.body.idEvento,
+            descripcion: req.body.descripcion,
+        }
+
+        return organizaciones.findOne({ where: { id: parametros.organizacion } })
+            .then(results => {
+                if (results === null) { res.status(400).send({ message: "Organizacion no encontrada." }) }
+                else {
+                    eventos.findOne({ where: { id: parametros.evento } })
+                        .then(results => {
+                            if (results === null) { res.status(400).send({ message: "Evento no encontrada." }) }
+                            else {
+                                iniciativas.create({
+                                    titulo: parametros.titulo,
+                                    aprobacion: false,
+                                    organizacion: parametros.organizacion,
+                                    evento: parametros.evento,
+                                    descripcion: parametros.descripcion,
+                                })
+                                .then(result => res.status(200).send({ message: "Iniciativa creada.", result }))
+                                .catch(error => res.status(400).send({ message: "Error al intentar crear la iniciativa.", error }))
+                            }
+                        }).catch(error => res.status(400).send({ message: "Error al intentar buscar el evento.", error }))
+                }
+             }).catch(error => res.status(400).send({ message: "Error al intentar buscar la organizacion.", error }))
      },
     modificar(req, res)
     {
-        return iniciativas
-            .findOne({ where: { id: req.body.id } })
+        var parametros = {
+            id: req.body.id,
+            titulo: req.body.titulo,
+            descripcion: req.body.descripcion,
+            aprobacion: req.body.aprobacion
+        }
+
+        return iniciativas.findOne({ where: { id: parametros.id } })
             .then(result => {
-                result
-                    .update({ titulo: req.body.titulo, descripcion: req.body.descripcion })
-                    .then(result => res.status(200).send(result))
-                    .catch(error => res.status(400).send(error))
+                if (result === null) { res.status(400).send({ message: "Iniciativa no encontrada." }) }
+                else {
+                    if (parametros.titulo == null) { parametros.titulo = result.titulo; }
+                    if (parametros.descripcion == null) { parametros.descripcion = result.descripcion; }
+                    if (parametros.aprobacion == null) { parametros.aprobacion = result.aprobacion; }
+                    result
+                        .update({ titulo: parametros.titulo, descripcion: parametros.descripcion, aprobacion: parametros.aprobacion})
+                        .then(result => res.status(200).send({ message: "Iniciativa modificada.", result }))
+                        .catch(error => res.status(400).send({ message: "Error al intentar modificar la iniciativa.", error }))
+                }
             })
-            .catch(error => res.status(400).send(error))
+            .catch(error => res.status(400).send({ message: "Error al intentar buscar la iniciativa.", error }))
      },
     aprobar(req, res)
     {
-        return iniciativas
-        .findOne({ where: { id: req.body.id } })
-        .then(result => {
-            result
-                .update({ aprobacion: req.body.aprobacion })
-                .then(result => res.status(200).send(result))
-                .catch(error => res.status(400).send(error))
-        })
-        .catch(error => res.status(400).send(error))
+        var parametros = {
+            id: req.body.id,
+            aprobacion: req.body.aprobacion
+        }
+        return iniciativas.findOne({ where: { id: parametros.id } })
+            .then(result => {
+                if (result === null) { res.status(400).send({ message: "Iniciativa no encontrada." }) }
+                else {
+                    if (parametros.aprobacion == null) { parametros.aprobacion = !result.aprobacion; }
+                    result
+                        .update({ aprobacion: parametros.aprobacion })
+                        .then(result => res.status(200).send({ message: "Iniciativa modificada.", result }))
+                        .catch(error => res.status(400).send({ message: "Error al intentar modificar la iniciativa.", error }))
+                }
+            })
+            .catch(error => res.status(400).send({ message: "Error al intentar buscar la iniciativa.", error }))
      },
     ver(req, res)
     {
+        var parametros = {
+            id: req.params.id
+        }
         return iniciativas
-            .findOne({ where: { id: req.body.id } })
-            .then(result => res.status(200).send(result))
-            .catch(error => res.status(400).send(error))
+            .findOne({ where: { id: parametros.id } })
+            .then(result => res.status(200).send({ message: "Iniciativa encontrada.", result }))
+            .catch(error => res.status(400).send({ message: "Error al intentar buscar la iniciativa.", error }))
     },
     listar(req, res)
     {
+        var parametros = { }
         return iniciativas
             .findAll()
             .then(result => res.status(200).send(result))
-            .catch(error => res.status(400).send(error))
+            .catch(error => res.status(400).send({ message: "Error al intentar buscar las iniciativas.", error }))
      },
     listarPorEvento(req, res)
     {
+        var parametros = {
+            evento: req.params.idEvento
+        }
         return iniciativas
-            .findAll({ where: { evento: req.body.evento } })
+            .findAll({ where: { evento: parametros.evento } })
             .then(result => res.status(200).send(result))
-            .catch(error => res.status(400).send(error))
+            .catch(error => res.status(400).send({ message: "Error al intentar buscar las iniciativas.", error }))
      },
     listarPorOrganizacion(req, res) {
+        var parametros = {
+            organizacion: req.params.idOrganizacion
+        }
         return iniciativas
-            .findAll({ where: { organizacion: req.body.organizacion } })
+            .findAll({ where: { organizacion: parametros.organizacion } })
             .then(result => res.status(200).send(result))
-            .catch(error => res.status(400).send(error))
+            .catch(error => res.status(400).send({ message: "Error al intentar buscar las iniciativas.", error }))
+    },
+    listarAprobadas(req, res) {
+        var parametros = { }
+        return iniciativas
+            .findAll({ where: { aprobacion: true } })
+            .then(result => res.status(200).send(result))
+            .catch(error => res.status(400).send({ message: "Error al intentar buscar las iniciativas.", error }))
     },
     listarPorAprobacion(req, res) {
+        var parametros = {
+            aprobacion: req.params.aprobacion
+        }
         return iniciativas
-            .findAll({ where: { aprobacion: req.body.aprobacion } })
+            .findAll({ where: { aprobacion: parametros.aprobacion } })
             .then(result => res.status(200).send(result) )
-            .catch(error => res.status(400).send(error))
+            .catch(error => res.status(400).send({ message: "Error al intentar buscar las iniciativas.", error }))
     }
 }
