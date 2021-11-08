@@ -22,9 +22,7 @@ app.use(function (req, res, next) {
 
 require('./routes')(app);
 
-app.get("*", (req, res) => res.status(200).send({
-  message: "Estamos en el aire",
-}));
+//app.get("*", (req, res) => res.status(200).send({ message: "Estamos en el aire" }));
 
 // Setup server port
 var port = process.env.PORT || 8080;

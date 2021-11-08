@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('perfilAdministradores', { 
+    await queryInterface.createTable('donantes', { 
       id: {
         autoIncrement: true,
         primaryKey: true,
@@ -17,6 +17,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      validacion: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -29,6 +33,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('perfilAdministradores');
+    await queryInterface.dropTable('donantes');
   }
 };
