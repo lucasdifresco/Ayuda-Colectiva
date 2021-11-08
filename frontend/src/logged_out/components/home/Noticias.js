@@ -79,7 +79,7 @@ function Noticias(props) {
               <br></br>
               <p>En abril 2020 se reportó el primer foco en la zona del Bolsón. El fuego se expandió afectando 23400 hectáreas. </p>
               <br></br>
-              <p>Hay 7 iniciativas activas para este evento. </p>
+              <p>Hay 3 iniciativas activas para este evento. </p>
             </div>
           </div>
         </div>

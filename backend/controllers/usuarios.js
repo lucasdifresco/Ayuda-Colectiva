@@ -27,6 +27,7 @@ module.exports = {
                     var token = jwt.sign({ email: parametros.email, id: result.id, rol: result.rol }, ACCESS_TOKEN_SECRET, { expiresIn: 86400 });
                     res.status(200).send({ token: token, email: parametros.email, id: result.id, rol: result.rol });
                 }
+
             })
             .catch(error => res.status(400).send({ message: 'Ocurrion un error al intentar buscar los datos.', error }))
     },
@@ -231,6 +232,7 @@ module.exports = {
                     .update({ aprobacion: parametros.aprobacion })
                     .then(result => res.status(200).send({ message: "La organizacion se a modificado correctamente.", result }))
                     .catch(error => res.status(400).send({ message: "Ocurrio un error al intentar modificar la organizacion.", error }))
+
             })
             .catch(error => res.status(400).send({ message: "Ocurrio un error al intentar conseguir la organización.", error }))
     },

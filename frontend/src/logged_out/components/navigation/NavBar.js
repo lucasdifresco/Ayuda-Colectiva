@@ -59,15 +59,15 @@ function NavBar(props) {
       icon: <HomeIcon className="text-white" />
     },
     {
-      link: "/Organizaciones",
+      link: "/organizaciones",
       name: "Organizaciones",
       icon: <EventIcon className="text-white" />
     },
-    /*{
+    {
       name: "Registrarse",
       onClick: openRegisterDialog,
       icon: <HowToRegIcon className="text-white" />
-    },*/
+    },
     {
       name: "Login",
       onClick: openLoginDialog,

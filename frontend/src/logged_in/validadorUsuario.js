@@ -6,7 +6,7 @@ const validarUsuario = (value) => {
     const menuItemValidado = [];
 
     if (role !== undefined && role !== null) {
-        if (role === entities.idPaciente) {
+        if (role === entities.idDonante) {
             value.filter(x => {
                 if (x.name === "Principal Paciente" || x.name === "Recetas paciente" || x.name === "Salir") {
                     menuItemValidado.push(x);
@@ -14,15 +14,7 @@ const validarUsuario = (value) => {
             });
         }
 
-        else if (role === entities.idSecretario) {
-            value.filter(x => {
-                if (x.name === "Principal" || x.name === "Recetas" || x.name === "Salir") {
-                    menuItemValidado.push(x);
-                }
-            });
-        }
-
-        else if (role === entities.idDoctor) {
+        else if (role === entities.idOrganizacion) {
             value.filter(x => {
                 if (x.name === "Principal" || x.name === "Recetas" || x.name === "Salir") {
                     menuItemValidado.push(x);
@@ -65,7 +57,7 @@ const esVisible = () => {
     var visible = false;
 
     if (role !== null && role !== undefined) {
-        if (role === entities.idDoctor || role === entities.idAmin) {
+        if (role === entities.idOrganizacion || role === entities.idAmin) {
             visible = true;
         }
     }
@@ -77,7 +69,7 @@ const esVisibleSecretario = () => {
     var visible = false;
 
     if (role !== null && role !== undefined) {
-        if (role === entities.idDoctor || role === entities.idAdmin || role === entities.idSecretario ) {
+        if (role === entities.idOrganizacion || role === entities.idAdmin ) {
             visible = true;
         }
     }
@@ -93,7 +85,7 @@ const esSecretarioAdmin = (value) => {
     var visible = false;
 
     if (role !== null && role !== undefined) {
-        if (role === entities.idAdmin || role === entities.idSecretario ) {
+        if (role === entities.idAdmin ) {
             visible = true;
         }
     }

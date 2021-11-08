@@ -363,7 +363,7 @@ function Main(props) {
 
   const selectDashboard = useCallback(() => {
     smoothScrollTop();
-    document.title = "Consultorio Raffaele";
+    document.title = "AyudaColectiva";
     setSelectedTab("Dashboard");
     if (!hasFetchedCardChart) {
       setHasFetchedCardChart(true);
@@ -380,7 +380,7 @@ function Main(props) {
 
   const selectPosts = useCallback(() => {
     smoothScrollTop();
-    document.title = "Consultorio Raffaele";
+    document.title = "AyudaColectiva";
     setSelectedTab("Posts");
     if (!hasFetchedEmojiTextArea) {
       setHasFetchedEmojiTextArea(true);
@@ -430,7 +430,7 @@ function Main(props) {
 
   const selectUsers = useCallback(() => {
     smoothScrollTop();
-    document.title = "Consultorio Raffaele";
+    document.title = "AyudaColectiva";
     setSelectedTab("Users");
   }, [setSelectedTab]);
 
