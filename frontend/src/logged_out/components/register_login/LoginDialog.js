@@ -65,7 +65,7 @@ function LoginDialog(props) {
     loginUser(loginData)
       .then(response => {
         if (response.success) {
-          if(response.response.user.role_id === entities.idPaciente) {
+          if(response.response.rol === entities.idDonante) {
             history.push("/c/dashboardPaciente");
           } else {
             history.push("/c/dashboard");

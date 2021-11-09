@@ -2,12 +2,15 @@ import urlWebServices from '../webServices';
 
  export const createUser = async function(user)  {
     // url
-    let url = urlWebServices.createUsers;
+    let url = urlWebServices.createDonante;
     // Genero formulario con datos a pasar
     let formData = new URLSearchParams();
+    formData.append('nombre', user.nombre);
+    formData.append('apellido', user.apellido);
     formData.append('email', user.email);
     formData.append('password', user.password);
     formData.append('rol', user.role);
+    formData.append('validacion', true);
    
     formData.append('status', 1);
 
@@ -30,7 +33,8 @@ import urlWebServices from '../webServices';
             success: (response.status === 200 ? true : false),
             response: data
         }
-
+        console.log("SUCCESS:");
+console.log(result);
         return result;
         
       } catch(e) {
@@ -38,7 +42,8 @@ import urlWebServices from '../webServices';
             success: false,
             response: e
         };
-
+        console.log("ERROR:");
+        console.log(result);
         return result;
       }
 }
@@ -69,8 +74,8 @@ export const loginUser = async function(user)  {
       if(response.status === 200)
       {
         localStorage.setItem("x", data.token);
-        localStorage.setItem("r", data.user.role_id);
-        localStorage.setItem("m", data.user.email);
+        localStorage.setItem("r", data.rol);
+        localStorage.setItem("m", data.email);
       }
       let result = {
           success: (response.status === 200 ? true : false),

@@ -23,7 +23,6 @@ module.exports = {
             .then(result => {
                 if (!bcrypt.compareSync(parametros.password, result.password)) { res.status(400).send({ message: 'Contraseña o usuario incorrectos.' }) }
                 else {
-                    console.log(process.env);
                     var token = jwt.sign({ email: parametros.email, id: result.id, rol: result.rol }, ACCESS_TOKEN_SECRET, { expiresIn: 86400 });
                     res.status(200).send({ token: token, email: parametros.email, id: result.id, rol: result.rol });
                 }
@@ -117,13 +116,15 @@ module.exports = {
             .then(result => {
                 if (result !== null) { res.status(401).send({ message: "El usuario ya existe." }) }
                 else {
-                    return organizaciones
+                    return donantes
                         .create({
+                            id: null,
                             nombre: parametros.nombre,
                             apellido: parametros.apellido,
-                            validacion: true
+                            validacion: 1
                         })
                         .then(result => {
+                            console.log(result);
                             return usuarios
                                 .create({
                                     email: parametros.email,

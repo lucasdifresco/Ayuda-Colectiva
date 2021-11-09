@@ -4,7 +4,7 @@ const urlWebServices = {
     /*
      * Users
      */ 
-    createUsers: rutaBack + "api/usuarios/crear",
+    createDonante: rutaBack + "api/donantes/crear",
     updateUsers: rutaBack + "api/usuarios/modificar",
     deleteUsers: rutaBack + "api/usuarios/disable",
     listUsers: rutaBack + "api/usuarios/list",
