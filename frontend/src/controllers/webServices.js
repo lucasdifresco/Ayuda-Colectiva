@@ -21,6 +21,11 @@ const urlWebServices = {
     findRoles: rutaBack + "api/role/find/name/",
 
     /*
+     * Organizaciones
+     */
+    createOrganizacion: rutaBack + "api/organizaciones/crear",
+
+    /*
      * MercadoPago
      */
     createMPPreference: rutaBack + "api/donaciones/crear",
