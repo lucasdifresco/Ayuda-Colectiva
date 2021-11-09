@@ -43,10 +43,28 @@ function Checkout(props) {
     const location = useLocation();
     const preference = location.state[0].preference;
     const preferenceId = location.state[0].preferenceId;
+    const mercadopago = location.state[0].mpObject;
     const history = useHistory();
 
     useEffect(() => {
-        crearBotonDePago(preferenceId);
+        //crearBotonDePago(preferenceId);
+
+        if(mercadopago !== null){
+            // Initialize the checkout
+            mercadopago.checkout({
+            preference: {
+                id: preferenceId
+            },
+            render: {
+                container: '#button-checkout', // Class name where the payment button will be displayed
+                label: 'Pagar con MercadoPago', // Change the payment button text (optional)
+            }, 
+            theme: {
+                elementsColor: "#007536",
+                headerColor: "#007536"
+            }
+            });
+        }
     });
 
     const goBack = (e) => {
