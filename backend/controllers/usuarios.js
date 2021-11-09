@@ -5,6 +5,7 @@ const usuarios = db.usuarios;
 const administradores = db.administradores;
 const organizaciones = db.organizaciones;
 const donantes = db.donantes;
+require('dotenv').config();
 
 const ROL_ADMINISTRADOR = 1;
 const ROL_ORGANIZACION = 2;
@@ -69,10 +70,18 @@ module.exports = {
     crearOrganizacion(req, res) {
         var parametros = {
             email: req.body.email,
-            password: req.body.password,
+            password: String(req.body.cuit),
             
             nombre: req.body.nombre,
-            mision: req.body.mision
+            mision: req.body.mision,
+            direccion: req.body.direccion,
+            provincia: req.body.provincia,
+            telefono: req.body.telefono,
+            personeriaJuridica: req.body.nroPersoneriaJuridica,
+            organismoOtorgamiento: req.body.organismoPersoneriaJuridica,
+            fechaOtorgamiento: req.body.fechaOtorgamientoPersoneriaJuridica,
+            paginaWeb: req.body.paginaWeb,
+            cuit: req.body.cuit
         }
 
         return usuarios
@@ -83,9 +92,17 @@ module.exports = {
                     return organizaciones
                         .create({
                             nombre: parametros.nombre,
-                            mision: parametros.mision,
-                            aprobacion: false,
-                            fechaDeAlta: new Date(Date.now()).toISOString()
+                            mision: "Prueba",
+                            aprobacion: process.env.ORGANIZACION_APROBACION_PENDIENTE,
+                            fechaDeAlta: new Date(Date.now()).toISOString(),
+                            direccion: parametros.direccion,
+                            provincia: parametros.provincia,
+                            telefono: parametros.telefono,
+                            nroPersoneriaJuridica: parametros.personeriaJuridica,
+                            organismoPersoneriaJuridica: parametros.organismoOtorgamiento,
+                            fechaOtorgamientoPersoneriaJuridica: null,
+                            CUIT: parametros.cuit
+
                         })
                         .then(result => {
                             return usuarios
