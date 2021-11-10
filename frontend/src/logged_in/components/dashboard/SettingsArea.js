@@ -58,9 +58,8 @@ function SettingsArea(props) {
         textColor="primary"
         centered
       >
-        <Tab label="Sacar turno" />
-        <Tab label="Lista de pacientes" />
-        <Tab label="Horario de atencion" />
+        <Tab label="Usuarios" />
+        //Aca podrian ir mas tabs
       </Tabs>
 
       <TabPanel value={value} index={0}>

@@ -222,7 +222,7 @@ function NavBar(props) {
     },
     {
       link: "/c/users",
-      name: "Usuarios",
+      name: "Organizaciones",
       onClick: closeMobileDrawer,
       icon: {
         desktop: (
@@ -282,7 +282,7 @@ console.log(datosUsuario);
                 display="inline"
                 color="primary"
               >
-                Consultorio
+                Ayuda
               </Typography>
               <Typography
                 variant="h4"
@@ -290,7 +290,7 @@ console.log(datosUsuario);
                 display="inline"
                 color="secondary"
               >
-                SanRaffaele
+                Colectiva
               </Typography>
             </Hidden>
           </Box>

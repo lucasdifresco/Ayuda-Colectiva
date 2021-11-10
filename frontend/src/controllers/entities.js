@@ -2,9 +2,9 @@ const entities = {
     /*
      * Ids relevantes
      */
-    idOrganizacion: 1,
-    idDonante: 2,
-    idAmin: 0
+    idOrganizacion: 2,
+    idDonante: 3,
+    idAmin: 1
 }
 
 export default entities;
