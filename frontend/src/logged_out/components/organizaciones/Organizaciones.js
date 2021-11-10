@@ -87,11 +87,6 @@ function Organizaciones(props) {
 
   const [formValues, setFormValues] = useState(defaultValues);
 
-  const handleChange = (event) => {
-    console.log(event.target.value);
-    setProvincia({value: event.target.value});
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
