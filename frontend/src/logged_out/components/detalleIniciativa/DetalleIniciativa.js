@@ -20,6 +20,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import { borderRadius, flexbox } from "@material-ui/system";
 // < Formulario
 import { createPreference } from "../../../controllers/api/api.mercadopago";
+import useMercadoPago from '../../../controllers/hooks/useMercadoPago';
 
 const theme = {
   spacing: 8,
@@ -92,10 +93,10 @@ function DetalleIniciativa(props) {
   const history = useHistory();
   const [formValues, setFormValues] = useState(defaultValues);
 
+  const mercadopago = useMercadoPago();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log(formValues);
 
     const orderData = {
       quantity: 1,
@@ -116,7 +117,8 @@ function DetalleIniciativa(props) {
             "/checkout",
             [{
               preferenceId: response.response.id,
-              preference: orderData
+              preference: orderData,
+              mpObject: mercadopago
             }])
 
         } else {
@@ -200,6 +202,7 @@ function DetalleIniciativa(props) {
                   >
                     <FormControlLabel value="100" control={<Radio />} label="$100" />
                     <FormControlLabel value="500" control={<Radio />} label="$500" />
+                    <FormControlLabel value="1000" control={<Radio />} label="$1000" />
                     <div className="otroContainer">
                       <FormControlLabel value="Otro" control={<Radio />} label="Otro" className={classes.radioMonto}/>
                       {formValues.monto == "Otro" ? 
@@ -224,7 +227,7 @@ function DetalleIniciativa(props) {
               </form>
             </Box>
           </Box>
-          <Box>
+         {/* <Box>
             <Typography variant="h2" align="left" className={classes.h2Style}>
               ¡Postulate para ayudar!
             </Typography>
@@ -240,7 +243,7 @@ function DetalleIniciativa(props) {
                 <Button variant="contained" disableElevation className={classes.button}>Enviar</Button>
               </FormControl>
             </Box>
-          </Box>
+         </Box> */}
         </Grid>
       </Grid>
     </div>
