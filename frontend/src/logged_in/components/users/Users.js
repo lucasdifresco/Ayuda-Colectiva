@@ -61,10 +61,10 @@ function Users(props) {
         textColor="primary"
         centered
       >
-        <Tab label="Usuarios" >
+        <Tab label="Organizaciones" >
         </Tab>
-        <Tab label="Roles" >
-        </Tab>
+       {/* <Tab label="Roles" >
+        </Tab> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>

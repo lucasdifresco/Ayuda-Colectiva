@@ -1,9 +1,10 @@
 import entities from "../controllers/entities";
-const variableGuardada = [];
+
 const role = parseInt(localStorage.getItem('r'));
 
 const validarUsuario = (value) => {
     const menuItemValidado = [];
+    
 
     if (role !== undefined && role !== null) {
         if (role === entities.idDonante) {
@@ -24,7 +25,7 @@ const validarUsuario = (value) => {
 
         else if (role === entities.idAmin) {
             value.filter(x => {
-                if (x.name === "Principal" || x.name === "Recetas" || x.name === "Usuarios" || x.name === "Salir") {
+                if (x.name === "Principal" || x.name === "Recetas" || x.name === "Organizaciones" || x.name === "Salir") {
                     menuItemValidado.push(x);
                 }
             });
