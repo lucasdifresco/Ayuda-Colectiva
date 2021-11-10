@@ -35,7 +35,7 @@ import validadorUsuario from "../../validadorUsuario.js";
 const styles = theme => ({
   appBar: {
     boxShadow: theme.shadows[6],
-    backgroundColor: theme.palette.common.white,
+    backgroundColor: theme.palette.primary,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -84,12 +84,15 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9)
     },
-    backgroundColor: theme.palette.common.black
+    backgroundColor: theme.palette.primary.dark
   },
   smBordered: {
     [theme.breakpoints.down("xs")]: {
       borderRadius: "50% !important"
     }
+  },
+  selectedItem: {
+    color: theme.palette.secondary.main
   },
   menuLink: {
     textDecoration: "none",
@@ -128,7 +131,7 @@ const styles = theme => ({
 });
 
 function NavBar(props) {
-  const { selectedTab, messages, classes, width } = props;
+  const { selectedTab, messages, classes, width, theme } = props;
   // Will be use to make website more accessible by screen readers
   const links = useRef([]);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -164,7 +167,7 @@ function NavBar(props) {
         desktop: (
           <DashboardIcon
             className={
-              selectedTab === "Dashboard" ? classes.textPrimary : "text-white"
+              selectedTab === "Dashboard" ? classes.selectedItem : "text-white"
             }
             fontSize="small"
           />
@@ -180,7 +183,7 @@ function NavBar(props) {
         desktop: (
           <DashboardIcon
             className={
-              selectedTab === "Dashboard" ? classes.textPrimary : "text-white"
+              selectedTab === "Dashboard" ? classes.selectedItem : "text-white"
             }
             fontSize="small"
           />
@@ -196,7 +199,7 @@ function NavBar(props) {
         desktop: (
           <FileCopyIcon
             className={
-              selectedTab === "Posts" ? classes.textPrimary : "text-white"
+              selectedTab === "Posts" ? classes.selectedItem : "text-white"
             }
             fontSize="small"
           />
@@ -212,7 +215,7 @@ function NavBar(props) {
         desktop: (
           <FileCopyIcon
             className={
-              selectedTab === "Posts" ? classes.textPrimary : "text-white"
+              selectedTab === "Posts" ? classes.selectedItem : "text-white"
             }
             fontSize="small"
           />
@@ -228,7 +231,7 @@ function NavBar(props) {
         desktop: (
           <PersonAddIcon
             className={
-              selectedTab === "Users" ? classes.textPrimary : "text-white"
+              selectedTab === "Users" ? classes.selectedItem : "text-white"
             }
             fontSize="small"
           />
@@ -280,7 +283,7 @@ console.log(datosUsuario);
                 variant="h4"
                 className={classes.brandText}
                 display="inline"
-                color="primary"
+                style={{color: theme.palette.secondary.light}}
               >
                 Ayuda
               </Typography>
@@ -288,7 +291,7 @@ console.log(datosUsuario);
                 variant="h4"
                 className={classes.brandText}
                 display="inline"
-                color="secondary"
+                style={{color: theme.palette.secondary.main}}
               >
                 Colectiva
               </Typography>
@@ -313,7 +316,7 @@ console.log(datosUsuario);
                 <ListItemText
                   className={classes.username}
                   primary={
-                    <Typography color="textPrimary">Usuario</Typography>
+                    <Typography style={{color: theme.palette.secondary.main}}>Usuario</Typography>
                   }
                 />
               )}
