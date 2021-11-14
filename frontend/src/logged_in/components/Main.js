@@ -13,6 +13,7 @@ import * as Back from '../../controllers/api/api.users';
 
 const styles = (theme) => ({
   main: {
+    backgroundColor: 'white',
     marginLeft: theme.spacing(9),
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
