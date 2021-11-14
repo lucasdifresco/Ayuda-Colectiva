@@ -1,10 +1,12 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { List, Divider, Paper, withStyles } from "@material-ui/core";
 import { Tab, Tabs, Box, Typography } from "@material-ui/core"
 import UsersTable from "./UsersTable";
 import UsersInfo from "./UsersInfo";
 import RoleTable from "./RoleTable";
+import { listarOrganizaciones } from "../../../controllers/api/api.organizaciones";
+
 
 const styles = {
   divider: {
@@ -34,7 +36,7 @@ function TabPanel(props) {
 
 function Users(props) {
   const {
-    userList,
+ //   listadoOrganizaciones,
     roleList,
     classes,
     openAddUserDialog,
@@ -45,7 +47,15 @@ function Users(props) {
     pushMessageToSnackbar,
   } = props;
 
-  useEffect(selectUsers, [selectUsers]);
+  const [listadoOrganizaciones, setOrganizaciones] = useState(null);
+  useEffect(() => { 
+
+    const getOrganizaciones = async () => {
+      const data = await listarOrganizaciones();
+      setOrganizaciones(data.response);
+    }
+    getOrganizaciones();
+  }, []);
 
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -73,7 +83,7 @@ function Users(props) {
             <UsersInfo openAddUserDialog={openAddUserDialog} />
             <Divider className={classes.divider} />
             <UsersTable
-              userList={userList}
+              listadoOrganizaciones={listadoOrganizaciones}
               pushMessageToSnackbar={pushMessageToSnackbar}
               targets={targets}
               setTargets={setTargets}
@@ -95,11 +105,11 @@ function Users(props) {
 
 Users.propTypes = {
   classes: PropTypes.object.isRequired,
-  userList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  listadoOrganizaciones: PropTypes.arrayOf(PropTypes.object).isRequired,
   roleList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectUsers: PropTypes.func.isRequired,
+ // selectUsers: PropTypes.func.isRequired,
   openAddUserDialog: PropTypes.func.isRequired,
-  openAddRoleDialog: PropTypes.func.isRequired
+ // openAddRoleDialog: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Users);
