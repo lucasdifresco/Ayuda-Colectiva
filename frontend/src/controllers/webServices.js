@@ -24,11 +24,13 @@ const urlWebServices = {
      * Organizaciones
      */
     createOrganizacion: rutaBack + "api/organizaciones/crear",
+    listOrganizaciones: rutaBack + "api/organizaciones/listar",
 
     /*
      * MercadoPago
      */
     createMPPreference: rutaBack + "api/donaciones/crear",
+    createMPPlan: rutaBack + "api/donaciones/suscripcionPlan",
 
     /*
      * Permissions
