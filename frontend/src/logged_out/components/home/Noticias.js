@@ -3,52 +3,23 @@ import './style.css';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { 
   Button,
-  Box
+  Box,
+  Typography
 } from "@material-ui/core";
 
 
 
 function Noticias(props) {
   const { width, listadoEventos } = props;
-  //Hay que poner un hook que al iniciar le pida al backend le pida el arreglo
-  //
+  
+  const styleTitulo = {
+    textAlign: 'center'
+  }
+
   console.log(listadoEventos);
   return (
-    <div style={{ backgroundColor: "#FFFFFF", paddingTop: "50px" }}>
-      {/*elements.map(v => 
-        <div className="wrapper">
-          <div className="container">
-            <img
-              className="top"
-              src="https://source.unsplash.com/random/?river,park"
-              alt=""
-            />
-            <div className="bottom">
-              <div className="left">
-                <div className="details">
-                  <h2 className="txt_products">{v.name}</h2>
-                  <p>Sub Name</p>
-                </div>
-                <div className="buy">
-                  <a href="#">
-                    <i className="fas fa-cart-plus"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="inside">
-            <div className="icon">
-              <VisibilityIcon />
-            </div>
-            <div className="contents">
-              <h1>Name</h1>
-              <p>Descriptions</p>
-            </div>
-          </div>
-        </div>
-      )*/}
-
+    <div style={{ backgroundColor: "#FFFFFF", paddingTop: "50px" }} id="eventosActivos">
+      <Typography variant="h2" style={styleTitulo}>Incendios activos</Typography>
       <div className="products_body center">
         
         {listadoEventos && (listadoEventos.map((listadoEventos, index) => (

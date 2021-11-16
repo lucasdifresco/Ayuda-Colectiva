@@ -90,11 +90,13 @@ body {
 }
 
 .wrapper .container .bottom .btnContainer .button {
-  background-color: #8DD580;
+  height: 48px;
+  background-color: #007536;
+  color: #fff;
 }
 
 .wrapper .container .bottom .btnContainer .button:hover {
-  background-color: #5BA353;
+  background-color: #005015;
 }
 
 .wrapper .container .bottom .left .details .txt_products {
