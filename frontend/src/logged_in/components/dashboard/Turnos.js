@@ -242,42 +242,49 @@ export default function MaterialTableDemo() {
   const [state, setState] = React.useState({
     columns: [
       {
-        title: 'Nombre',
-        field: 'name',
+        title: 'Titulo',
+        field: 'title',
       },
       {
-        title: 'Apellido',
-        field: 'surname',
+        title: 'Inicio',
+        field: 'start',
       },
       {
-        title: 'Doctor',
-        field: 'Doctorfield',
-        lookup: { 20: 'Sarasa', 10: 'Tomas' },
+        title: 'Territorio',
+        field: 'territory',
+        lookup: { 20: 'Rosario, San Nicolas Ramallo', 10: 'El Bolson, Rio Negro', 30:'Calamuchita, Villa General Belgrano'},
       },
       {
-        title: 'Fecha',
-        field: 'birthYear'
+        title: 'Iniciativas',
+        field: 'iniciativa'
       },
       {
-        title: 'Horario',
-        field: 'birthCity',
-        lookup: { 34: '11:30', 63: '12:30' },
+        title: 'Estado',
+        field: 'state',
+        lookup: { 34: 'Activo', 63: 'Inactivo' },
       },
     ],
     data: [
       {
-        name: 'Mehmet',
-        surname: 'Baran',
-        Doctorfield: 10,
-        birthYear: "19/11/2020",
-        birthCity: 63
+        title: 'Incendios en el Bolson',
+        start: '23/05/2020',
+        territory: 10,
+        iniciativa: "8",
+        state: 63
       },
       {
-        name: 'Zerya Betül',
-        surname: 'Baran',
-        Doctorfield: 20,
-        birthYear: "17/12/2020",
-        birthCity: 34,
+        title: 'Quema pastizales en el Delta',
+        start: '03/10/2020',
+        territory: 20,
+        iniciativa: "12",
+        state: 34
+      },
+      {
+        title: 'Cordoba incendiada',
+        start: '08/12/2020',
+        territory: 30,
+        iniciativa: "3",
+        state: 34
       },
     ],
   });
