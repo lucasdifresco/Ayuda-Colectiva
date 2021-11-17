@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Grid, 
   Typography,
@@ -10,6 +10,7 @@ import {
   Box
 } from "@material-ui/core";
 import './styles.css'
+import { listarIniciativas } from "../../../controllers/api/api.iniciativas";
 
 const styles = theme =>({
   h1Style: {
@@ -45,82 +46,57 @@ const styles = theme =>({
     color: '#FFFFFF',
     fontWeight: '500',
     margin: 'auto',
-    marginTop: '10px'
+    height: '48px'
   }
 });
 
 function Eventos(props) {
 
   const { theme, classes } = props;
-  //Hay que poner un hook que al iniciar le pida al backend le pida el arreglo
-  //
+  const incendioId = props.match.params.idEvento;
+  
+  const [listadoIniciativas, setIniciativas] = useState(null);
+  useEffect(() => { 
 
-  return (
+    const getIniciativas = async () => {
+      const data = await listarIniciativas(incendioId);
+      setIniciativas(data.response);
+    }
+    getIniciativas();
+  }, []);
+
+  return ( listadoIniciativas && (
     
     <Box pt={12}>
       <Box pt={6} pb={8}>
         <Typography variant="h1" align="center" className={classes.h1Style} >
-          Incendios en El Bolsón
+         {listadoIniciativas[0].eventoDetalle.titulo}
         </Typography>
       </Box>
 
       <Box>
-        <Grid container spacing={2} className="blog-post">
+        {listadoIniciativas && (listadoIniciativas.map((listadoIniciativas, index) => (
+        <Grid container spacing={2} className="blog-post" key={index}>
           <Grid item lg={2} className={classes.imgWrapper}>
-            <img src="https://wwfar.awsassets.panda.org/img/logofusa_13643.jpg" alt="" className="blog-post__img"/>
+            <img src={listadoIniciativas.organizacionDetalle.logo} alt="" className="blog-post__img"/>
           </Grid>
           <Grid item lg={8} style={{padding: '20px'}}> 
             <div className={classes.infoWrapper}>
-              <Typography className={classes.verticalAlign} variant="body1">Donar recursos para la reforestación</Typography> 
+              <Typography className={classes.verticalAlign} variant="body1">{listadoIniciativas.titulo}</Typography> 
             </div>
           </Grid>
           <Grid item lg={2}> 
             <div className={classes.infoWrapper}>
               <div className={classes.verticalAlign}>
-                <Button href="/iniciativa" className={classes.btnStyle} >Saber mas</Button>
+                <Button href={'/iniciativa/' + listadoIniciativas.id} variant="contained" disableElevation className={classes.btnStyle} >Saber mas</Button>
               </div>
             </div>
           </Grid>
         </Grid>
-
-        <Grid container spacing={2} className="blog-post">
-          <Grid item lg={2} className={classes.imgWrapper}>            
-            <img src="https://wwfar.awsassets.panda.org/img/logofusa_13643.jpg" alt="" className="blog-post__img"/>
-          </Grid>
-          <Grid item lg={8} style={{padding: '20px'}}> 
-            <div className={classes.infoWrapper}>
-              <Typography className={classes.verticalAlign} variant="body1">Participar de las jornadas de reforestación</Typography> 
-            </div>
-          </Grid>
-          <Grid item lg={2}> 
-            <div className={classes.infoWrapper}>
-              <div className={classes.verticalAlign}>
-                <Button href="/iniciativa" className={classes.btnStyle} >Saber mas</Button>
-              </div>
-            </div>
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={2} className="blog-post">
-          <Grid item lg={2} className={classes.imgWrapper}>
-            <img src="http://www.plantarse.org/images/plantarse.jpg" alt="" className="blog-post__img"/>
-          </Grid>
-          <Grid item lg={8} style={{padding: '20px'}}> 
-            <div className={classes.infoWrapper}>
-              <Typography className={classes.verticalAlign} variant="body1">Donar plata para brindar ayuda a las familias afectadas</Typography> 
-            </div>
-          </Grid>
-          <Grid item lg={2}> 
-            <div className={classes.infoWrapper}>
-              <div className={classes.verticalAlign}>
-                <Button href="/iniciativa" className={classes.btnStyle} >Saber mas</Button>
-              </div>
-            </div>
-          </Grid>
-        </Grid>
+        )))}
       </Box>
     </Box>
-  );
+  ));
 }
 
 export default withStyles(styles, { withTheme: true })(Eventos);

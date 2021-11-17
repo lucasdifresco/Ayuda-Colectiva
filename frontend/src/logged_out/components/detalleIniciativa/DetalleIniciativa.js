@@ -19,8 +19,9 @@ import TextField from '@material-ui/core/TextField';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { borderRadius, flexbox } from "@material-ui/system";
 // < Formulario
-import { createPreference } from "../../../controllers/api/api.mercadopago";
+import { createPreference, createPlan } from "../../../controllers/api/api.mercadopago";
 import useMercadoPago from '../../../controllers/hooks/useMercadoPago';
+import { getIniciativa } from "../../../controllers/api/api.iniciativas";
 
 const theme = {
   spacing: 8,
@@ -93,6 +94,18 @@ function DetalleIniciativa(props) {
   const history = useHistory();
   const [formValues, setFormValues] = useState(defaultValues);
 
+  const idIniciativa = props.match.params.idIniciativa;
+
+  const [detalleIniciativa, setDetalleIniciativa] = useState(null);
+  useEffect(() => { 
+
+    const getDetalleIniciativa = async () => {
+      const data = await getIniciativa(idIniciativa);
+      setDetalleIniciativa(data.response.result);
+    }
+    getDetalleIniciativa();
+  }, []);
+
   const mercadopago = useMercadoPago();
 
   const handleSubmit = (event) => {
@@ -100,7 +113,7 @@ function DetalleIniciativa(props) {
 
     const orderData = {
       quantity: 1,
-      description: "Titulo iniciativa",
+      description: detalleIniciativa.titulo + " - " + detalleIniciativa.organizacionDetalle.nombre,
       price: formValues.monto
     };
 
@@ -118,7 +131,8 @@ function DetalleIniciativa(props) {
             [{
               preferenceId: response.response.id,
               preference: orderData,
-              mpObject: mercadopago
+              mpObject: mercadopago,
+              idIniciativa: detalleIniciativa.id
             }])
 
         } else {
@@ -129,6 +143,34 @@ function DetalleIniciativa(props) {
    
   };
 
+  const irASuscripcion = (event) => {
+    event.preventDefault();
+
+    const orderData = {
+      monto: 500,
+      titulo: "Colaboración mensual para Fundación Vida Silvestre"
+    };
+
+    createPlan(orderData)
+      .then(response => {
+        if (response.success) {
+          alert("TODO BIENE");
+
+        } else {
+          
+          alert("Error");
+        }
+      });
+/*
+
+    history.push(
+      "/suscripcion",
+      [{
+        iniciativa: 1,
+        organizacion: 1
+      }])*/
+  }
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({
@@ -138,18 +180,18 @@ function DetalleIniciativa(props) {
   };
 
 
-  return (
+  return ( detalleIniciativa && (
     <div className={classes.contentPaddingLg}>
       <Box style={{ backgroundColor: "#FFFFFF" }} pt={12} pb={8}>
         <Typography variant="subtitle2" align="center" className={classes.eventStyle}>
-          Incendios en El Bolsón
+          {detalleIniciativa.eventoDetalle.titulo}
         </Typography>
         <Box>
           <Typography variant="h1" align="center" className={classes.h1Style} >
-          Donar recursos para la reforestación
+          {detalleIniciativa.titulo}
           </Typography>
           <Typography variant="subtitle1" align="center">
-          Liderado por <Link href="#">Fundación Vida Silvestre</Link>
+          Liderado por <Link href="#">{detalleIniciativa.organizacionDetalle.nombre}</Link>
           </Typography>
         </Box>
       </Box>
@@ -168,7 +210,7 @@ function DetalleIniciativa(props) {
                 <br></br>
               </Typography>
               <Typography variant="body1" paragraph align="left">
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
+                {detalleIniciativa.descripcion}
               </Typography>
             </Box>
             <Box>
@@ -227,6 +269,14 @@ function DetalleIniciativa(props) {
               </form>
             </Box>
           </Box>
+          <Box style={{marginTop: '20px', textAlign: 'center'}}>
+            <Typography variant="body1" paragraph align="center">
+              ó
+            </Typography>
+            <Link style={{cursor: 'pointer', fontSize: '1rem'}} onClick={irASuscripcion}>
+              Suscribite para colaborar con Vida Silvestre mensualmente
+            </Link>
+          </Box>
          {/* <Box>
             <Typography variant="h2" align="left" className={classes.h2Style}>
               ¡Postulate para ayudar!
@@ -247,7 +297,7 @@ function DetalleIniciativa(props) {
         </Grid>
       </Grid>
     </div>
-  );
+  ));
 }
 
 

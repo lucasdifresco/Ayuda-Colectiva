@@ -10,6 +10,8 @@ import QuienesSomos from "./home/quienessomos";
 import Blog from "./blog/Blog";
 import BlogPost from "./blog/BlogPost";
 import Checkout from "./donacion/Checkout";
+import Suscripcion from "./donacion/Suscripcion";
+import { Subscript } from "@mui/icons-material";
 
 function Routing(props) {
   const { blogPosts, selectBlog, selectHome, selectQuienesSomos} = props;
@@ -37,14 +39,15 @@ function Routing(props) {
       />
       
       <PropsRoute path="/inicio" component={Home} selectHome={selectHome} />
-      <PropsRoute path="/iniciativa" component={DetalleIniciativa} />
+      <PropsRoute path="/iniciativa/:idIniciativa" component={DetalleIniciativa} />
       <PropsRoute path="/organizaciones" component={Organizaciones} />
-      <PropsRoute path="/eventos" component={Eventos} />
+      <PropsRoute path="/eventos/:idEvento" component={Eventos} />
       <PropsRoute path="/QuienesSomos"
                   component={QuienesSomos} 
                   selectQuienesSomos={selectQuienesSomos} />
                   
       <PropsRoute path="/checkout" component={Checkout}  />
+      <PropsRoute path="/suscripcion" component={Suscripcion}  />
       <Redirect from='*' to='/inicio'/>
     </Switch>
   );

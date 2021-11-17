@@ -38,7 +38,7 @@ function Noticias(props) {
                 </div>
               </div>
               <Box className="btnContainer">
-                <Button href="/eventos" variant="contained" disableElevation className="button" >Cómo ayudar</Button>
+                <Button href={'/eventos/' + listadoEventos.id} variant="contained" disableElevation className="button" >Cómo ayudar</Button>
               </Box>
             </div>
           </div>
