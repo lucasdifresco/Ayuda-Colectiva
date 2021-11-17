@@ -23,11 +23,19 @@ module.exports = {
       },
       organizacion: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'organizaciones',
+          key: 'id'
+        }
       },
       evento: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'eventos',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

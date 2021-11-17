@@ -11,6 +11,7 @@ module.exports = {
             organizacion: req.body.idOrganizacion,
             evento: req.body.idEvento,
             descripcion: req.body.descripcion,
+            createdAt: new Date(Date.now()).toISOString()
         }
 
         return organizaciones.findOne({ where: { id: parametros.organizacion } })
@@ -27,6 +28,7 @@ module.exports = {
                                     organizacion: parametros.organizacion,
                                     evento: parametros.evento,
                                     descripcion: parametros.descripcion,
+                                    createdAt: parametros.createdAt
                                 })
                                 .then(result => res.status(200).send({ message: "Iniciativa creada.", result }))
                                 .catch(error => res.status(400).send({ message: "Error al intentar crear la iniciativa.", error }))
@@ -92,7 +94,8 @@ module.exports = {
     {
         var parametros = { }
         return iniciativas
-            .findAll()
+            .findAll({ include: [organizaciones] })
+            //.findAll()
             .then(result => res.status(200).send(result))
             .catch(error => res.status(400).send({ message: "Error al intentar buscar las iniciativas.", error }))
      },
@@ -102,7 +105,7 @@ module.exports = {
             evento: req.params.idEvento
         }
         return iniciativas
-            .findAll({ where: { evento: parametros.evento } })
+            .findAll({ where: { evento: parametros.evento, aprobacion: true } })
             .then(result => res.status(200).send(result))
             .catch(error => res.status(400).send({ message: "Error al intentar buscar las iniciativas.", error }))
      },

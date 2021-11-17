@@ -1,7 +1,10 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-class modelo extends Model { };
+  class modelo extends Model {
+    static associate(models) {
+      modelo.hasMany(models.iniciativas, { as: 'iniciativas', foreignKey: 'evento' })
+     }};
   modelo.init({
     id: {
       autoIncrement: true,

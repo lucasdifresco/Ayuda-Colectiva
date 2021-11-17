@@ -3,8 +3,8 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class modelo extends Model {
     static associate(models) {
-      modelo.belongsTo(models.organizaciones, { as: 'organizaciones', foreignKey: 'organizacion' })
-      modelo.belongsTo(models.eventos, { as: 'eventos', foreignKey: 'evento' })
+      modelo.belongsTo(models.organizaciones, { as: 'organizaciones', foreignKey: 'organizacion' });
+      modelo.belongsTo(models.eventos, { as: 'eventos', foreignKey: 'evento' });
     }
   };
   modelo.init({
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     evento: {
       allowNull: false,
       type: DataTypes.INTEGER
-    }
+    } 
   }, { sequelize, modelName: 'iniciativas', timestamps: false });
   return modelo;
 };

@@ -52,15 +52,15 @@ module.exports = (app) => {
   app.get('/api/postulaciones/listar/inicio=:inicio/fin=:fin', auth.administrador, postulacionesCTLR.listarEntreFechas);
   
   // Iniciativas
-  app.post('/api/iniciativas/crear', auth.administrador, iniciativasCTLR.crear);
+  app.post('/api/iniciativas/crear', auth.administrador, iniciativasCTLR.crear);  
   app.post('/api/iniciativas/modificar', auth.administrador, iniciativasCTLR.modificar);
   app.post('/api/iniciativas/aprobar', auth.administrador, iniciativasCTLR.aprobar);
-  app.get('/api/iniciativas/ver/iniciativa/:iniciativa', iniciativasCTLR.ver);
+  app.get('/api/iniciativas/ver/iniciativa/:iniciativa', iniciativasCTLR.ver); // Para uso del público
   app.get('/api/iniciativas/listarAprobadas', iniciativasCTLR.listarAprobadas);
-  app.get('/api/iniciativas/listar', auth.administrador, iniciativasCTLR.listar);
-  app.get('/api/iniciativas/listar/evento/:evento', iniciativasCTLR.listarPorEvento);
-  app.get('/api/iniciativas/listar/organizacion/:organizacion', iniciativasCTLR.listarPorOrganizacion);
-  app.get('/api/iniciativas/listar/aprobacion/:aprobacion', iniciativasCTLR.listarPorAprobacion);
+  app.get('/api/iniciativas/listar', auth.administrador, iniciativasCTLR.listar); // Solo Admin
+  app.get('/api/iniciativas/listar/evento/:evento', iniciativasCTLR.listarPorEvento); // Para uso del publico
+  app.get('/api/iniciativas/listar/organizacion/:organizacion', auth.organizacion, iniciativasCTLR.listarPorOrganizacion); // Solo Organizaciones
+  app.get('/api/iniciativas/listar/aprobacion/:aprobacion', auth.administrador, iniciativasCTLR.listarPorAprobacion); // Solo Admin
 
   // MercadoPago
   app.post('/api/donaciones/crear', mercadopagoAPI.createPreference);
