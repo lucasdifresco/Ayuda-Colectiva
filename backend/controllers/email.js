@@ -12,10 +12,9 @@ module.exports = {
       host: 'smtp.sendgrid.net',
       port: 465,
       secure: true,
-      //service: 'Gmail',
       auth: {
         user: 'apikey',
-        pass: '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'
+        pass: 'emailPass'
       },
       tls: {
         rejectUnauthorized: false
@@ -23,7 +22,7 @@ module.exports = {
     });
       
     var mailOptions = {
-      from: "<apikey>",
+      from: "<info@lizardcode.com.ar>",
       to: parametros.destino,
       subject: parametros.sujeto,
       text: parametros.contenido,
