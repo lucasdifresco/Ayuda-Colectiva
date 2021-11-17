@@ -17,21 +17,6 @@ import WaveBorder from "../../../shared/components/WaveBorder";
 import Banner from "../../dummy_data/images/banner.png";
 
 const styles = theme => ({
-  imagenFondo:{
-    backgroundImage: `url(${Banner})`
-  },
- 
-  posicion: { 
-    position: 'absolute',
-    top: 100,
-    width: 500,
-    paddingLeft: 40 
- },
-
- letra: { 
-  font: 'bold 24px/45px Helvetica, Sans-Serif',
-  letterspacing: -1
-},
 
   extraLargeButtonLabel: {
     fontSize: theme.typography.body1.fontSize,
@@ -93,6 +78,9 @@ const styles = theme => ({
     boxShadow: theme.shadows[4]
   },
   container: {
+    width: '70%',
+    display: 'flex',
+    alignItems: 'center',
     marginTop: theme.spacing(6),
     marginBottom: theme.spacing(12),
     [theme.breakpoints.down("md")]: {
@@ -112,6 +100,42 @@ const styles = theme => ({
   },
   waveBorder: {
     paddingTop: theme.spacing(4)
+  },
+  headSectionContainer: {
+    backgroundImage: 'url("/images/tim-marshall-cAtzHUz7Z8g-unsplash.jpg")',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    marginTop: '64px',
+    height: '100vh',
+    display: 'flex'
+  },
+  titulo: {
+    fontSize: '4rem',
+    fontFamily: '"Montserrat", sans-serif',
+    color: 'white',
+    textAlign: 'center'
+  },
+  logo: {
+    fontFamily: "'Baloo Bhaijaan', cursive",
+    fontWeight: "400",
+    fontSize: '4.2rem'
+  },
+  descripcion: {
+    color: 'white',
+    fontSize: '1.5rem',
+    textAlign: 'center',
+    fontFamily: '"Montserrat", sans-serif',
+    paddingTop: '20px'
+  },
+  verEventos: {
+    height: '48px',
+    marginTop: '40px',
+    backgroundColor: '#8DD580',
+    '&:hover': {
+      backgroundColor: '#5BA353'
+    },
+    fontWeight: '600'
   }
 });
 
@@ -119,21 +143,12 @@ function HeadSection(props) {
   const { classes, theme, width } = props;
   return (
     <Fragment>
-      <div className={classNames("lg-p-top", classes.wrapper)}>
+      <div className={classNames(classes.wrapper, classes.headSectionContainer)}>
         <div className={classNames("container-fluid", classes.container)}>
           <Box display="flex" justifyContent="center" className="row">
-            <Card
-              className={classes.card, classes.imagenFondo}
-              data-aos-delay="200"
-              data-aos="zoom-in"
-            >
-
-              <h2
-                className={classes.posicion}
-              ><span className={classes.letra}>El Hospital San Raffaele es uno de los principales de la Red Regional de Enfermedades Raras
-                       <br></br> <br></br>Excelencia clínica, científica y universitaria</span></h2>
-              
-            </Card>
+              <Typography variant="h1" className={classes.titulo}>Bienvenido a <br/><span className={classes.logo}>AyudaColectiva</span></Typography>
+              <Typography variant="body1" className={classes.descripcion}>Potenciamos las acciones de respuesta a incendios forestales conectando ONGs locales con personas de todo el país</Typography>
+              <Button href="#eventosActivos" variant="contained" disableElevation className={classes.verEventos} >Quiero ayudar!</Button>
           </Box>
         </div>
       </div>

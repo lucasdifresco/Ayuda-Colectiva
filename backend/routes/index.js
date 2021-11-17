@@ -39,7 +39,7 @@ module.exports = (app) => {
   app.post('/api/eventos/modificar', auth.administrador, eventosCTLR.modificar);
   app.get('/api/eventos/ver/id=:id', eventosCTLR.ver);
   app.get('/api/eventos/listarValidos', eventosCTLR.listarEventosValidos);
-  app.get('/api/eventos/listar', auth.administrador, eventosCTLR.listar);
+  app.get('/api/eventos/listar', eventosCTLR.listar);
   app.get('/api/eventos/listar/estado=:estado', auth.administrador, eventosCTLR.listarEventosPorEstado);
   
   // Postulaciones
@@ -64,5 +64,6 @@ module.exports = (app) => {
 
   // MercadoPago
   app.post('/api/donaciones/crear', mercadopagoAPI.createPreference);
+  app.post('/api/donaciones/suscripcionPlan', mercadopagoAPI.createPlan);
 }
 

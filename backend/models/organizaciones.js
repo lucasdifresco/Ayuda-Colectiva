@@ -2,7 +2,9 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class modelo extends Model {
-    static associate(models) { }
+    static associate(models) { 
+      modelo.hasMany(models.iniciativas, { as: 'iniciativas', foreignKey: 'organizacion' })
+    }
  };
   modelo.init({
     id: {
@@ -59,6 +61,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       type: DataTypes.STRING
     },
+    logo: {
+      allowNull: true,
+      type: DataTypes.STRING
+    }
   }, { sequelize, modelName: 'organizaciones', timestamps: false });
   return modelo;
 };

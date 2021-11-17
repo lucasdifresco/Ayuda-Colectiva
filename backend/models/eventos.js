@@ -20,7 +20,15 @@ class modelo extends Model { };
     estado: {
       allowNull: false,
       type: DataTypes.BOOLEAN
+    },
+    region: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    imagen: {
+      allowNull: true,
+      type: DataTypes.STRING
     }
-  }, { sequelize, modelName: 'eventos'});
+  }, { sequelize, modelName: 'eventos', timestamps: false});
   return modelo;
 };

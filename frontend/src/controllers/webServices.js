@@ -27,6 +27,17 @@ const urlWebServices = {
     listOrganizaciones: rutaBack + "api/organizaciones/listar",
 
     /*
+     * Eventos
+     */
+    listEventosValidos: rutaBack + "api/eventos/listarValidos",
+
+    /*
+     * Iniciativas
+     */
+    listIniciativasPorEvento: rutaBack + "api/iniciativas/listar/evento/:evento",
+    getDetalleIniciativa: rutaBack + "api/iniciativas/ver/iniciativa/:iniciativa",
+
+    /*
      * MercadoPago
      */
     createMPPreference: rutaBack + "api/donaciones/crear",
