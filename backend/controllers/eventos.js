@@ -6,12 +6,14 @@ module.exports = {
         var parametros = {
             titulo: req.body.titulo,
             estado: req.body.estado,
+            territorio: req.body.territorio,
             descripcion: req.body.descripcion
         }
         return eventos
             .create({
                 titulo: parametros.titulo,
                 estado: parametros.estado,
+                territorio: parametros.territorio,
                 descripcion: parametros.descripcion,
             })
             .then(result => res.status(200).send({ message: "Evento creado.", result }))
@@ -22,6 +24,7 @@ module.exports = {
             id: req.body.id,
             titulo: req.body.titulo,
             estado: req.body.estado,
+            territorio: req.body.territorio,
             descripcion: req.body.descripcion
         }
         return eventos
@@ -31,9 +34,10 @@ module.exports = {
                 else {
                     if (parametros.titulo == null) { parametros.titulo = result.titulo; }
                     if (parametros.estado == null) { parametros.estado = result.estado; }
+                    if (parametros.territorio == null) { parametros.estado = result.territorio; }
                     if (parametros.descripcion == null) { parametros.descripcion = result.descripcion; }
                     result
-                        .update({ titulo: parametros.titulo, estado: parametros.estado, descripcion: parametros.descripcion })
+                        .update({ titulo: parametros.titulo, estado: parametros.estado, territorio: parametros.territorio, descripcion: parametros.descripcion })
                         .then(result => res.status(200).send({ message: "Evento modificado.", result }))
                         .catch(error => res.status(400).send({ message: "Ocurrio un error al intentar modificar el evento.", error }))
                 }

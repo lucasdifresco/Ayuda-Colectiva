@@ -13,6 +13,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      territorio: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       descripcion: {
         allowNull: false,
         type: Sequelize.STRING

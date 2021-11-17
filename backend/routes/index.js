@@ -3,6 +3,7 @@ const eventosCTLR = require('../controllers/eventos');
 const iniciativasCTLR = require('../controllers/iniciativas');
 const postulacionesCTLR = require('../controllers/postulaciones');
 const mercadopagoAPI = require('../apis/mercadopago');
+const emailCTLR = require('../controllers/email');
 
 const auth = require('../auth/authorization');
 
@@ -64,5 +65,9 @@ module.exports = (app) => {
 
   // MercadoPago
   app.post('/api/donaciones/crear', mercadopagoAPI.createPreference);
+
+  // Email
+  app.post('/api/email/enviar', auth.administrador, emailCTLR.enviarMail);
+
 }
 

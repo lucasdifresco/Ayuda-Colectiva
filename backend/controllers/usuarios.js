@@ -149,7 +149,7 @@ module.exports = {
                                     rol: ROL_DONANTE,
                                     id: result.id,
                                 })
-                                .then(result => res.status(200).send({ email: parametros.email, nombre: parametros.nombre, apellido: parametros.apellido, validacion: true, rol: ROL_ADMINISTRADOR, id: result.id }))
+                                .then(result => res.status(200).send({ email: parametros.email, nombre: parametros.nombre, apellido: parametros.apellido, validacion: true, rol: ROL_DONANTE, id: result.id }))
                                 .catch(error => res.status(400).send({ message: 'Ocurrio un error al intentar crear el usuario.', error }))
                         })
                         .catch(error => res.status(400).send({ message: 'Ocurrio un error al intentar crear el donante.', error }))
