@@ -1,4 +1,5 @@
 const db = require('../models');
+const iniciativas = db.iniciativas;
 const eventos = db.eventos;
 
 module.exports = {

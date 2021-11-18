@@ -33,7 +33,11 @@ module.exports = (sequelize, DataTypes) => {
     evento: {
       allowNull: false,
       type: DataTypes.INTEGER
-    } 
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    }
   }, { sequelize, modelName: 'iniciativas', timestamps: false });
   return modelo;
 };

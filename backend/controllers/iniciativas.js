@@ -94,8 +94,7 @@ module.exports = {
     {
         var parametros = { }
         return iniciativas
-            .findAll({ include: [organizaciones] })
-            //.findAll()
+            .findAll({ include: [{ model: organizaciones, as: "organizaciones" }] })
             .then(result => res.status(200).send(result))
             .catch(error => res.status(400).send({ message: "Error al intentar buscar las iniciativas.", error }))
      },
