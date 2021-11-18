@@ -23,6 +23,7 @@
     "mongoose-paginate": "^5.0.3",
     "morgan": "~1.9.0",
     "mysql2": "^2.1.0",
+    "node-fetch": "^2.6.6",
     "nodemailer": "^6.4.11",
     "nodemon": "^1.19.4",
     "sequelize": "^6.3.4"

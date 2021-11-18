@@ -1,3 +1,4 @@
+require('dotenv').config();
 const db = require('../models');
 var bcrypt = require('bcryptjs');
 const emailCTLR = require('../controllers/email');
@@ -5,9 +6,6 @@ const posulaciones = db.postulaciones;
 const iniciativas = db.iniciativas;
 const donantes = db.donantes;
 const usuarios = db.usuarios;
-
-const ROL_ORGANIZACION = 2;
-const ROL_DONANTE = 3;
 
 module.exports = {
     async crear(req, res) {
@@ -24,7 +22,7 @@ module.exports = {
                 else { res.status(400).send({ message: "Iniciativa no encontrada." }) }
             }).catch(error => res.status(400).send({ message: "Error al intentar buscar la iniciativa.", error }))
 
-        var organizacion = await usuarios.findOne({ where: { id: iniciativa.organizacion, rol: ROL_ORGANIZACION } })
+        var organizacion = await usuarios.findOne({ where: { id: iniciativa.organizacion, rol: process.env.ROL_ORGANIZACION } })
             .then(organizacion => { if (organizacion !== null) { return organizacion } else { res.status(400).send({ message: "La organización no existe." }); } })
             .catch(error => res.status(400).send({ message: "Error al intentar buscar la organización.", error }))
 
@@ -61,7 +59,7 @@ module.exports = {
                                 .create({
                                     email: nuevoDonante.email,
                                     password: bcrypt.hashSync(nuevoDonante.password, 8),
-                                    rol: ROL_DONANTE,
+                                    rol: process.env.ROL_DONANTE,
                                     id: donante.id,
                                 })
                                 .catch(error => res.status(400).send({ message: 'Ocurrio un error al intentar crear el usuario.', error }))

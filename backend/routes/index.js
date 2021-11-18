@@ -2,10 +2,10 @@ const usuariosCTLR = require('../controllers/usuarios');
 const eventosCTLR = require('../controllers/eventos');
 const iniciativasCTLR = require('../controllers/iniciativas');
 const postulacionesCTLR = require('../controllers/postulaciones');
-const mercadopagoAPI = require('../apis/mercadopago');
+const mercadopagoAPI = require('../controllers/mercadopago');
 const emailCTLR = require('../controllers/email');
 
-const auth = require('../auth/authorization');
+const auth = require('../controllers/authorization');
 
 module.exports = (app) => {
   // Usuarios
@@ -65,9 +65,10 @@ module.exports = (app) => {
 
   // MercadoPago
   app.post('/api/donaciones/crear', mercadopagoAPI.createPreference);
+  app.post('/api/donaciones/suscripcion/crearPlan', mercadopagoAPI.createPlan);
+  app.post('/api/donaciones/suscripcion/suscribir', mercadopagoAPI.suscribeToPlan);
 
   // Email
   app.post('/api/email/enviar', auth.administrador, emailCTLR.enviarMail);
-
 }
 

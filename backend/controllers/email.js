@@ -1,3 +1,4 @@
+require('dotenv').config();
 const nodemailer = require('nodemailer');
 
 module.exports = {
@@ -9,21 +10,23 @@ module.exports = {
       html: req.body.html,
     }
     var transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
       secure: true,
-      service: "Gmail",
+      service: process.env.MAIL_SERVICE,
       auth: {
-        user: 'contact.ayudacolectiva@gmail.com',
-        pass: 'INSERT PASSWORD'
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS
       },
       tls: {
         rejectUnauthorized: false
       }
     });
-      
+    
+    
+    
     var mailOptions = {
-      from: "<contact.ayudacolectiva@gmail.com>",
+      from: "<" + process.env.MAIL_USER + ">",
       to: parametros.destino,
       subject: parametros.sujeto,
       text: parametros.contenido,
@@ -34,5 +37,5 @@ module.exports = {
       if (error) { res.status(400).send(error.message); }
       else { res.status(200).send({ success: true, message: 'done' }); }
     });
-  },
+  }
 }

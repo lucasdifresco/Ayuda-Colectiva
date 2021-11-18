@@ -1,3 +1,4 @@
+require('dotenv').config();
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const db = require('../models');
@@ -5,12 +6,6 @@ const usuarios = db.usuarios;
 const administradores = db.administradores;
 const organizaciones = db.organizaciones;
 const donantes = db.donantes;
-require('dotenv').config();
-
-const ROL_ADMINISTRADOR = 1;
-const ROL_ORGANIZACION = 2;
-const ROL_DONANTE = 3;
-const ACCESS_TOKEN_SECRET = "0807a101f4ed349c5a5c0bcde06e4feb3f12f4b47de7c007adc129435c9742291f9c38add730813fe5aa0054dddf2fb94046fd55a3c226b7eb4445cf5898b614";
 
 module.exports = {
     // Log in de Usuarios
@@ -24,7 +19,7 @@ module.exports = {
             .then(result => {
                 if (!bcrypt.compareSync(parametros.password, result.password)) { res.status(400).send({ message: 'Contraseña o usuario incorrectos.' }) }
                 else {
-                    var token = jwt.sign({ email: parametros.email, id: result.id, rol: result.rol }, ACCESS_TOKEN_SECRET, { expiresIn: 86400 });
+                    var token = jwt.sign({ email: parametros.email, id: result.id, rol: result.rol }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 86400 });
                     res.status(200).send({ token: token, email: parametros.email, id: result.id, rol: result.rol });
                 }
 
@@ -57,10 +52,10 @@ module.exports = {
                                 .create({
                                     email: parametros.email,
                                     password: bcrypt.hashSync(parametros.password, 8),
-                                    rol: ROL_ADMINISTRADOR,
+                                    rol: process.env.ROL_ADMINISTRADOR,
                                     id: result.id,
                                 })
-                                .then(result => res.status(200).send({ email: parametros.email, nombre: parametros.nombre, apellido: parametros.apellido, rol: ROL_ADMINISTRADOR, id: result.id }) )
+                                .then(result => res.status(200).send({ email: parametros.email, nombre: parametros.nombre, apellido: parametros.apellido, rol: process.env.ROL_ADMINISTRADOR, id: result.id }) )
                                 .catch(error => res.status(400).send({ message: 'Ocurrio un error al intentar crear el usuario.', error }))
                         })
                         .catch(error => res.status(400).send({ message: 'Ocurrio un error al intentar crear el administrador.', error }))
@@ -109,10 +104,10 @@ module.exports = {
                                 .create({
                                     email: parametros.email,
                                     password: bcrypt.hashSync(parametros.password, 8),
-                                    rol: ROL_ORGANIZACION,
+                                    rol: process.env.ROL_ORGANIZACION,
                                     id: result.id,
                                 })
-                                .then(result => res.status(200).send({ email: parametros.email, nombre: parametros.nombre, mision: parametros.mision, aprobacion: false, rol: ROL_ORGANIZACION, id: result.id }))
+                                .then(result => res.status(200).send({ email: parametros.email, nombre: parametros.nombre, mision: parametros.mision, aprobacion: false, rol: process.env.ROL_ORGANIZACION, id: result.id }))
                                 .catch(error => res.status(400).send({ message: 'Ocurrio un error al intentar crear el usuario.', error }))
                         })
                         .catch(error => res.status(400).send({ message: 'Ocurrio un error al intentar crear la organizacion.', error }))
@@ -146,10 +141,10 @@ module.exports = {
                                 .create({
                                     email: parametros.email,
                                     password: bcrypt.hashSync(parametros.password, 8),
-                                    rol: ROL_DONANTE,
+                                    rol: process.env.ROL_DONANTE,
                                     id: result.id,
                                 })
-                                .then(result => res.status(200).send({ email: parametros.email, nombre: parametros.nombre, apellido: parametros.apellido, validacion: true, rol: ROL_DONANTE, id: result.id }))
+                                .then(result => res.status(200).send({ email: parametros.email, nombre: parametros.nombre, apellido: parametros.apellido, validacion: true, rol: process.env.ROL_DONANTE, id: result.id }))
                                 .catch(error => res.status(400).send({ message: 'Ocurrio un error al intentar crear el usuario.', error }))
                         })
                         .catch(error => res.status(400).send({ message: 'Ocurrio un error al intentar crear el donante.', error }))
