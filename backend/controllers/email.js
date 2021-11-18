@@ -9,12 +9,13 @@ module.exports = {
       html: req.body.html,
     }
     var transporter = nodemailer.createTransport({
-      host: 'smtp.sendgrid.net',
+      host: 'smtp.gmail.com',
       port: 465,
       secure: true,
+      service: "Gmail",
       auth: {
-        user: 'apikey',
-        pass: 'emailPass'
+        user: 'contact.ayudacolectiva@gmail.com',
+        pass: 'INSERT PASSWORD'
       },
       tls: {
         rejectUnauthorized: false
@@ -22,7 +23,7 @@ module.exports = {
     });
       
     var mailOptions = {
-      from: "<info@lizardcode.com.ar>",
+      from: "<contact.ayudacolectiva@gmail.com>",
       to: parametros.destino,
       subject: parametros.sujeto,
       text: parametros.contenido,
@@ -31,13 +32,7 @@ module.exports = {
       
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) { res.status(400).send(error.message); }
-      else {
-        console.log("mail enviado");
-        console.log(res.json(info.response));
-        console.log("mensaje enviado", info.messageId);
-        console.log("mensaje url", nodemailer.getTestMessageUrl(info));
-        res.status(200).send({ success: true, message: 'done' });
-      }
+      else { res.status(200).send({ success: true, message: 'done' }); }
     });
-  }
+  },
 }
