@@ -1,7 +1,7 @@
 import React, { Fragment , useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import Settings1 from "./Turnos";
-import Settings2 from './Iniciativas';
+import ListadoDeEventos from "./Turnos";
+import ListadoDeIniciativas from './Iniciativas';
 import MultipleSelect from "./HorarioAtencion";
 import { Tab, Tabs, Box, Typography } from "@material-ui/core"
 import UserDataArea from "./ListaPacientes";
@@ -41,15 +41,7 @@ function SettingsArea(props) {
   }
 
   const [miLista, setLista] = useState([])
-  useEffect(() => {
-    obtenerUsuarios()
-  }, [])
-  
-  const obtenerUsuarios = async() => {
-    await listPatients()
-      .then(v => setLista(v.response))
-      .catch(e => { console.log(e) });
-  }
+
   return (
     <Fragment>
       <Tabs
@@ -64,10 +56,10 @@ function SettingsArea(props) {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <Settings1 pushMessageToSnackbar={pushMessageToSnackbar} />
+        <ListadoDeEventos pushMessageToSnackbar={pushMessageToSnackbar} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Settings2 pushMessageToSnackbar={pushMessageToSnackbar} />
+        <ListadoDeIniciativas pushMessageToSnackbar={pushMessageToSnackbar} />
         
       </TabPanel>
       <TabPanel value={value} index={2}>

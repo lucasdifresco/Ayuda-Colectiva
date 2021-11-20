@@ -2,7 +2,14 @@ import urlWebServices from '../webServices';
 
 export const listarIniciativas = async function(idEvento) {
  // url
- let url = urlWebServices.listIniciativasPorEvento.replace( /\:evento/, idEvento);
+ let url = "";
+ if(idEvento) {
+  url = urlWebServices.listIniciativasPorEvento.replace( /\:evento/, idEvento);
+ } else {
+  url = urlWebServices.listIniciativas;
+ }
+ 
+ var token = localStorage.getItem('x');
 
  try {
      // Hago llamada al endpoint
@@ -12,7 +19,8 @@ export const listarIniciativas = async function(idEvento) {
        headers: {
          'Accept': 'application/x-www-form-urlencoded',
          'Origin': 'http://localhost:3000/',
-         'Content-type': 'application/x-www-form-urlencoded'
+         'Content-type': 'application/x-www-form-urlencoded',
+         'x-access-token': `${token}`
        }
      });
 

@@ -209,16 +209,6 @@ function Main(props) {
   }, [setTransactions]);
 
   const fetchRandomUsers = useCallback(() => {
-    let user = {
-      email: "hola@test.com",
-      password: 232323,
-      role: 2
-    }
-
-    const test = Back.createUser(user);
-    console.log('PAULA -> ');
-    console.log(test);
-    console.log('<- PAULA');
     const userList = [];
     const iterations = 4;
     const oneMonthSeconds = Math.round(60 * 60 * 24 * 30.5);
