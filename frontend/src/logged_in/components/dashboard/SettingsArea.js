@@ -1,6 +1,7 @@
 import React, { Fragment , useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import Settings1 from "./Turnos";
+import Settings2 from './Iniciativas';
 import MultipleSelect from "./HorarioAtencion";
 import { Tab, Tabs, Box, Typography } from "@material-ui/core"
 import UserDataArea from "./ListaPacientes";
@@ -58,7 +59,8 @@ function SettingsArea(props) {
         textColor="primary"
         centered
       >
-        <Tab label="Usuarios" />
+        <Tab label="Eventos" />
+        <Tab label="Iniciativas" />
         //Aca podrian ir mas tabs
       </Tabs>
 
@@ -66,11 +68,8 @@ function SettingsArea(props) {
         <Settings1 pushMessageToSnackbar={pushMessageToSnackbar} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <UserDataArea
-          pushMessageToSnackbar={pushMessageToSnackbar}
-          targets={miLista}
-          setTargets={setTargets}
-        />
+        <Settings2 pushMessageToSnackbar={pushMessageToSnackbar} />
+        
       </TabPanel>
       <TabPanel value={value} index={2}>
         <MultipleSelect pushMessageToSnackbar={pushMessageToSnackbar} />
@@ -84,3 +83,11 @@ SettingsArea.propTypes = {
 };
 
 export default SettingsArea;
+/*
+UserDataArea va en el index 1 como componente con todo eso
+<UserDataArea
+          //pushMessageToSnackbar={pushMessageToSnackbar}
+          //targets={miLista}
+          //setTargets={setTargets}
+        />
+        */
