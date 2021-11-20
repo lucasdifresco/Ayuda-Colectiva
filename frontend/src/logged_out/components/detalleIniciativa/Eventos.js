@@ -77,10 +77,10 @@ function Eventos(props) {
       <Box>
         {listadoIniciativas && (listadoIniciativas.map((listadoIniciativas, index) => (
         <Grid container spacing={2} className="blog-post" key={index}>
-          <Grid item lg={2} className={classes.imgWrapper}>
+          <Grid item lg={2} className="imgWrapper">
             <img src={listadoIniciativas.organizacionDetalle.logo} alt="" className="blog-post__img"/>
           </Grid>
-          <Grid item lg={8} style={{padding: '20px'}}> 
+          <Grid item lg={8} style={{padding: '20px'}} className="textWrapper"> 
             <div className={classes.infoWrapper}>
               <Typography className={classes.verticalAlign} variant="body1">{listadoIniciativas.titulo}</Typography> 
             </div>
