@@ -61,7 +61,6 @@ function SettingsArea(props) {
       >
         <Tab label="Eventos" />
         <Tab label="Iniciativas" />
-        //Aca podrian ir mas tabs
       </Tabs>
 
       <TabPanel value={value} index={0}>

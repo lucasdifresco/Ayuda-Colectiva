@@ -64,7 +64,11 @@ module.exports = (sequelize, DataTypes) => {
     logo: {
       allowNull: true,
       type: DataTypes.STRING
-    }
+    },
+    pendienteAprobacion: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN
+    },
   }, { sequelize, modelName: 'organizaciones', timestamps: false });
   return modelo;
 };

@@ -23,6 +23,8 @@ import {
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import ImageIcon from "@material-ui/icons/Image";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -165,14 +167,14 @@ function NavBar(props) {
       onClick: closeMobileDrawer,
       icon: {
         desktop: (
-          <DashboardIcon
+          <EventNoteIcon
             className={
               selectedTab === "Dashboard" ? classes.selectedItem : "text-white"
             }
             fontSize="small"
           />
         ),
-        mobile: <DashboardIcon className="text-white" />
+        mobile: <EventNoteIcon className="text-white" />
       }
     },
     {
@@ -191,7 +193,7 @@ function NavBar(props) {
         mobile: <DashboardIcon className="text-white" />
       }
     },
-    {
+   /* {
       link: "/c/posts",
       name: "Recetas",
       onClick: closeMobileDrawer,
@@ -206,7 +208,7 @@ function NavBar(props) {
         ),
         mobile: <ImageIcon className="text-white" />
       }
-    },
+    }, */
     {
       link: "/c/postsPaciente",
       name: "Recetas paciente",
@@ -229,14 +231,14 @@ function NavBar(props) {
       onClick: closeMobileDrawer,
       icon: {
         desktop: (
-          <PersonAddIcon
+          <HomeWorkIcon
             className={
               selectedTab === "Users" ? classes.selectedItem : "text-white"
             }
             fontSize="small"
           />
         ),
-        mobile: <PersonAddIcon className="text-white" />
+        mobile: <HomeWorkIcon className="text-white" />
       }
     },
     {
