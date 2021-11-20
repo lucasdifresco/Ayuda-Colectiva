@@ -18,17 +18,24 @@ import CloseIcon from "@material-ui/icons/Close";
 
 const styles = theme => ({
   closeIcon: {
-    marginRight: theme.spacing(0.5)
+  //  marginRight: theme.spacing(0.5),
+    minWidth: 0,
   },
   headSection: {
     width: 200
   },
   blackList: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: theme.palette.common.white,
     height: "100%"
   },
   noDecoration: {
     textDecoration: "none !important"
+  },
+  textColor: {
+    color: theme.palette.primary.main,
+  },
+  iconStyle: {
+    minWidth: '36px'
   }
 });
 
@@ -91,10 +98,10 @@ function NavigationDrawer(props) {
                   disableRipple
                   disableTouchRipple
                 >
-                  <ListItemIcon>{element.icon}</ListItemIcon>
+                  <ListItemIcon className={classes.iconStyle}>{element.icon}</ListItemIcon>
                   <ListItemText
                     primary={
-                      <Typography variant="subtitle1" className="text-white">
+                      <Typography variant="subtitle1" className={classes.textColor}>
                         {element.name}
                       </Typography>
                     }
@@ -105,10 +112,10 @@ function NavigationDrawer(props) {
           }
           return (
             <ListItem button key={element.name} onClick={element.onClick}>
-              <ListItemIcon>{element.icon}</ListItemIcon>
+              <ListItemIcon className={classes.iconStyle}>{element.icon}</ListItemIcon>
               <ListItemText
                 primary={
-                  <Typography variant="subtitle1" className="text-white">
+                  <Typography variant="subtitle1" className={classes.textColor}>
                     {element.name}
                   </Typography>
                 }

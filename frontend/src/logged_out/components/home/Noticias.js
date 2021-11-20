@@ -1,6 +1,7 @@
 import React from "react";
 import './style.css';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import CloseIcon from '@mui/icons-material/Close';
 import { 
   Button,
   Box,
@@ -16,7 +17,7 @@ function Noticias(props) {
     textAlign: 'center'
   }
 
-  console.log(listadoEventos);
+  
   return (
     <div style={{ backgroundColor: "#FFFFFF", paddingTop: "50px" }} id="eventosActivos">
       <Typography variant="h2" style={styleTitulo}>Incendios activos</Typography>
@@ -34,17 +35,20 @@ function Noticias(props) {
               <div className="left">
                 <div className="details">
                   <h2 className="txt_products">{listadoEventos.titulo}</h2>
-                  <p>{listadoEventos.region}</p>
+                  <p className="txt_region">{listadoEventos.region}</p>
                 </div>
               </div>
               <Box className="btnContainer">
-                <Button href={'/eventos/' + listadoEventos.id} variant="contained" disableElevation className="button" >Cómo ayudar</Button>
+                <Button href={'/eventos/' + listadoEventos.id} variant="contained" disableElevation className="button" >Ver iniciativas</Button>
               </Box>
             </div>
           </div>
           <div className="inside">
-            <div className="icon">
+            <div className="icon" id="openInside">
               <VisibilityIcon />
+            </div>
+            <div className="icon_close">
+              <CloseIcon />
             </div>
             <div className="contents">
               <h1>{listadoEventos.titulo}</h1>
