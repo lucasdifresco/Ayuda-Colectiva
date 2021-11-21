@@ -80,6 +80,27 @@ const styles = theme =>({
   },
   radioMonto: {
     display: 'inline-block'
+  },
+  colaborarBtn: {
+    width: "150px",
+    height: "36px",
+    position: "fixed",
+    top: "60%",
+    right: "-114px",
+    backgroundColor: theme.palette.primary.main,
+    color: "white",
+    borderRadius: "8px 8px 0 0",
+    display: "flex",
+    alignItems: "center",
+    transformOrigin: "0 0",
+    transform: "rotate(270deg)",
+    cursor: "pointer",
+    [theme.breakpoints.up('sm')]: {
+      display: "none",
+    }
+  },
+  colaborarBtn_text: {
+    margin: "auto"
   }
 });
 
@@ -226,7 +247,7 @@ function DetalleIniciativa(props) {
           </div>
         </Grid>
         
-        <Grid item lg={4} xs={12}>
+        <Grid item lg={4} xs={12} id="donacion">
           <Box>
             <Typography variant="h2" align="left" className={classes.h2Style}>
               ¡Colaborá con esta iniciativa!
@@ -296,6 +317,9 @@ function DetalleIniciativa(props) {
          </Box> */}
         </Grid>
       </Grid>
+      <Link href="#donacion" className={classes.colaborarBtn}>
+        <span className={classes.colaborarBtn_text}>Quiero colaborar</span>
+      </Link>
     </div>
   ));
 }
