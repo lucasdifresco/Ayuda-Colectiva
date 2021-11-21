@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import './styles.css'
 import { listarIniciativas } from "../../../controllers/api/api.iniciativas";
+import { buscarEvento } from "../../../controllers/api/api.eventos";
 
 const styles = theme =>({
   h1Style: {
@@ -56,24 +57,34 @@ function Eventos(props) {
   const incendioId = props.match.params.idEvento;
   
   const [listadoIniciativas, setIniciativas] = useState(null);
+  const [evento, setEvento] = useState(null);
   useEffect(() => { 
 
     const getIniciativas = async () => {
       const data = await listarIniciativas(incendioId);
       setIniciativas(data.response);
     }
+
+    const getEvento = async () => {
+      console.log('in getEvento')
+      const data = await buscarEvento(incendioId);
+      setEvento(data.response);
+    }
+
     getIniciativas();
+    getEvento();
   }, []);
 
-  return ( listadoIniciativas && (
+  return  evento && (
     
     <Box pt={12}>
       <Box pt={6} pb={8}>
         <Typography variant="h1" align="center" className={classes.h1Style} >
-         {listadoIniciativas[0].eventoDetalle.titulo}
+          {console.log(evento)}
+         {evento.titulo}
         </Typography>
       </Box>
-
+      { listadoIniciativas && (
       <Box>
         {listadoIniciativas && (listadoIniciativas.map((listadoIniciativas, index) => (
         <Grid container spacing={2} className="blog-post" key={index}>
@@ -95,8 +106,9 @@ function Eventos(props) {
         </Grid>
         )))}
       </Box>
+      )}
     </Box>
-  ));
+  );
 }
 
 export default withStyles(styles, { withTheme: true })(Eventos);

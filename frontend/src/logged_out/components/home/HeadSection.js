@@ -161,7 +161,7 @@ function HeadSection(props) {
           <Box display="flex" justifyContent="center" className={classNames("container-fluid", classes.containerTexto)}>
               <Typography variant="h1" className={classes.titulo}>Bienvenido a <br/><span className={classes.logo}>AyudaColectiva</span></Typography>
               <Typography variant="body1" className={classes.descripcion}>Potenciamos las acciones de respuesta a incendios forestales conectando ONGs locales con personas de todo el país</Typography>
-              <Button href="#eventosActivos" variant="contained" disableElevation className={classes.verEventos} >Quiero ayudar!</Button>
+              <Button href="#eventosActivos" variant="contained" disableElevation className={classes.verEventos} >¡Quiero ayudar!</Button>
           </Box>
         </div>
       </div>
