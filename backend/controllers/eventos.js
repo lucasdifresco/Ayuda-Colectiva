@@ -7,8 +7,9 @@ module.exports = {
         var parametros = {
             titulo: req.body.titulo,
             estado: req.body.estado,
-            territorio: req.body.territorio,
             descripcion: req.body.descripcion
+            region: req.body.region,
+            imagen: req.body.imagen
         }
         return eventos
             .create({
@@ -16,6 +17,8 @@ module.exports = {
                 estado: parametros.estado,
                 territorio: parametros.territorio,
                 descripcion: parametros.descripcion,
+                region: parametros.region,
+                imagen: parametros.imagen
             })
             .then(result => res.status(200).send({ message: "Evento creado.", result }))
             .catch(error => res.status(400).send({ message: "Ocurrio un error al intentar crear el evento.", error}))
@@ -25,8 +28,9 @@ module.exports = {
             id: req.body.id,
             titulo: req.body.titulo,
             estado: req.body.estado,
-            territorio: req.body.territorio,
-            descripcion: req.body.descripcion
+            descripcion: req.body.descripcion,
+            region: req.body.region,
+            imagen: req.body.imagen
         }
         return eventos
             .findOne({ where: { id: parametros.id } })
@@ -37,8 +41,12 @@ module.exports = {
                     if (parametros.estado == null) { parametros.estado = result.estado; }
                     if (parametros.territorio == null) { parametros.estado = result.territorio; }
                     if (parametros.descripcion == null) { parametros.descripcion = result.descripcion; }
+                    if (parametros.region == null) { parametros.region = result.region; }
+                    if (parametros.imagen == null) { parametros.imagen = result.imagen; }
                     result
-                        .update({ titulo: parametros.titulo, estado: parametros.estado, territorio: parametros.territorio, descripcion: parametros.descripcion })
+                        .update({ titulo: parametros.titulo, estado: parametros.estado, 
+                            descripcion: parametros.descripcion, region: parametros.region,
+                            imagen: parametros.imagen })
                         .then(result => res.status(200).send({ message: "Evento modificado.", result }))
                         .catch(error => res.status(400).send({ message: "Ocurrio un error al intentar modificar el evento.", error }))
                 }

@@ -33,8 +33,7 @@ import urlWebServices from '../webServices';
             success: (response.status === 200 ? true : false),
             response: data
         }
-        console.log("SUCCESS:");
-console.log(result);
+        
         return result;
         
       } catch(e) {

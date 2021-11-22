@@ -17,21 +17,6 @@ import WaveBorder from "../../../shared/components/WaveBorder";
 import Banner from "../../dummy_data/images/banner.png";
 
 const styles = theme => ({
-  imagenFondo:{
-    backgroundImage: `url(${Banner})`
-  },
- 
-  posicion: { 
-    position: 'absolute',
-    top: 100,
-    width: 500,
-    paddingLeft: 40 
- },
-
- letra: { 
-  font: 'bold 24px/45px Helvetica, Sans-Serif',
-  letterspacing: -1
-},
 
   extraLargeButtonLabel: {
     fontSize: theme.typography.body1.fontSize,
@@ -92,17 +77,27 @@ const styles = theme => ({
     borderRadius: theme.shape.borderRadius,
     boxShadow: theme.shadows[4]
   },
+  headSectionContainer: {
+    backgroundImage: 'url("/images/tim-marshall-cAtzHUz7Z8g-unsplash.jpg")',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    height: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyItems: 'center',
+  },
   container: {
-    marginTop: theme.spacing(6),
-    marginBottom: theme.spacing(12),
+    width: '70%',
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '64px',
     [theme.breakpoints.down("md")]: {
       marginBottom: theme.spacing(9)
     },
     [theme.breakpoints.down("sm")]: {
-      marginBottom: theme.spacing(6)
-    },
-    [theme.breakpoints.down("sm")]: {
-      marginBottom: theme.spacing(3)
+      marginTop: '56px',
+      width: '80%',
     }
   },
   containerFix: {
@@ -112,28 +107,61 @@ const styles = theme => ({
   },
   waveBorder: {
     paddingTop: theme.spacing(4)
-  }
+  },
+  containerTexto: {
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  titulo: {
+    fontSize: '4rem',
+    fontFamily: '"Montserrat", sans-serif',
+    color: 'white',
+    textAlign: 'center',
+    [theme.breakpoints.down("sm")]: {
+      fontSize: '2.7rem',
+    }
+  },
+  logo: {
+    fontFamily: "'Baloo Bhaijaan', cursive",
+    fontWeight: "400",
+    fontSize: '4.2rem',
+    [theme.breakpoints.down("sm")]: {
+      fontSize: '3rem',
+    }
+  },
+  descripcion: {
+    color: 'white',
+    fontSize: '1.5rem',
+    textAlign: 'center',
+    fontFamily: '"Montserrat", sans-serif',
+    paddingTop: '20px',
+    maxWidth: '70%',
+    [theme.breakpoints.down("sm")]: {
+      fontSize: '1.2rem',
+      maxWidth: '100%',
+    }
+  },
+  verEventos: {
+    height: '48px',
+    marginTop: '40px',
+    backgroundColor: '#8DD580',
+    '&:hover': {
+      backgroundColor: '#5BA353'
+    },
+    fontWeight: '600'
+  },
 });
 
 function HeadSection(props) {
   const { classes, theme, width } = props;
   return (
     <Fragment>
-      <div className={classNames("lg-p-top", classes.wrapper)}>
+      <div className={classNames(classes.wrapper, classes.headSectionContainer)}>
         <div className={classNames("container-fluid", classes.container)}>
-          <Box display="flex" justifyContent="center" className="row">
-            <Card
-              className={classes.card, classes.imagenFondo}
-              data-aos-delay="200"
-              data-aos="zoom-in"
-            >
-
-              <h2
-                className={classes.posicion}
-              ><span className={classes.letra}>El Hospital San Raffaele es uno de los principales de la Red Regional de Enfermedades Raras
-                       <br></br> <br></br>Excelencia clínica, científica y universitaria</span></h2>
-              
-            </Card>
+          <Box display="flex" justifyContent="center" className={classNames("container-fluid", classes.containerTexto)}>
+              <Typography variant="h1" className={classes.titulo}>Bienvenido a <br/><span className={classes.logo}>AyudaColectiva</span></Typography>
+              <Typography variant="body1" className={classes.descripcion}>Potenciamos las acciones de respuesta a incendios forestales conectando ONGs locales con personas de todo el país</Typography>
+              <Button href="#eventosActivos" variant="contained" disableElevation className={classes.verEventos} >¡Quiero ayudar!</Button>
           </Box>
         </div>
       </div>

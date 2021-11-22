@@ -24,11 +24,26 @@ const urlWebServices = {
      * Organizaciones
      */
     createOrganizacion: rutaBack + "api/organizaciones/crear",
+    listOrganizaciones: rutaBack + "api/organizaciones/listar",
+
+    /*
+     * Eventos
+     */
+    listEventosValidos: rutaBack + "api/eventos/listarValidos",
+    getEvento: rutaBack + "api/eventos/ver/id=:id",
+
+    /*
+     * Iniciativas
+     */
+    listIniciativasPorEvento: rutaBack + "api/iniciativas/listar/evento/:evento",
+    listIniciativas: rutaBack + "api/iniciativas/listar",
+    getDetalleIniciativa: rutaBack + "api/iniciativas/ver/iniciativa/:iniciativa",
 
     /*
      * MercadoPago
      */
     createMPPreference: rutaBack + "api/donaciones/crear",
+    createMPPlan: rutaBack + "api/donaciones/suscripcionPlan",
 
     /*
      * Permissions

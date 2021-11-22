@@ -12,10 +12,9 @@ const styles = theme => ({
     padding: "50px",
     margin: "auto",
     marginTop: "100px",
-   // padding: "0 16px",
-  /*  [theme.breakpoints.up('sm')]: {
-      padding: "0 128px",
-    },*/
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: "80%",
+    },
   },
   mainTitle: {
     fontSize: '1.8rem',
@@ -45,6 +44,7 @@ function Checkout(props) {
     const preferenceId = location.state[0].preferenceId;
     const mercadopago = location.state[0].mpObject;
     const history = useHistory();
+    const idIniciativa = location.state[0].idIniciativa;
 
     useEffect(() => {
         //crearBotonDePago(preferenceId);
@@ -68,7 +68,7 @@ function Checkout(props) {
     });
 
     const goBack = (e) => {
-      history.push("/iniciativa");
+      history.push("/iniciativa/" + idIniciativa);
     };
 
     return (

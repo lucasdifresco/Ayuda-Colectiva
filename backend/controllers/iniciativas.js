@@ -83,10 +83,16 @@ module.exports = {
     ver(req, res)
     {
         var parametros = {
-            id: req.params.id
+            id: req.params.iniciativa
         }
         return iniciativas
-            .findOne({ where: { id: parametros.id } })
+            .findOne({ 
+                include: [{
+                    all: true,
+                    nested: true
+                }],
+                where: { id: parametros.id }
+            })
             .then(result => res.status(200).send({ message: "Iniciativa encontrada.", result }))
             .catch(error => res.status(400).send({ message: "Error al intentar buscar la iniciativa.", error }))
     },
@@ -101,10 +107,16 @@ module.exports = {
     listarPorEvento(req, res)
     {
         var parametros = {
-            evento: req.params.idEvento
+            evento: req.params.evento
         }
         return iniciativas
-            .findAll({ where: { evento: parametros.evento, aprobacion: true } })
+            .findAll({ 
+                include: [{
+                    all: true,
+                    nested: true
+                }],
+                where: { evento: parametros.evento } 
+            })
             .then(result => res.status(200).send(result))
             .catch(error => res.status(400).send({ message: "Error al intentar buscar las iniciativas.", error }))
      },
