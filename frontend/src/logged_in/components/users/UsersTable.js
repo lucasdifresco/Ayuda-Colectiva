@@ -85,7 +85,8 @@ function UsersTable(props) {
     },
     [setPage]
   );
-console.log(listadoOrganizaciones);
+
+  const valoresAprobacion = ['Rechazado', 'Aprobado'];
 
     return listadoOrganizaciones ? (
       <div className={classes.tableWrapper}>
@@ -110,7 +111,7 @@ console.log(listadoOrganizaciones);
                     {listadoOrganizaciones.telefono}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {listadoOrganizaciones.aprobacion ? 'Aprobada' : 'Rechazada'}
+                    {listadoOrganizaciones.pendienteAprobacion ? 'Pendiente' : valoresAprobacion[+listadoOrganizaciones.aprobacion]}
                   </TableCell>
                   <TableCell component="th" scope="row">
                     <IconButton> 

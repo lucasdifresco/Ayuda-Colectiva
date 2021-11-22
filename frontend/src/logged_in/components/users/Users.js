@@ -51,8 +51,10 @@ function Users(props) {
   useEffect(() => { 
 
     const getOrganizaciones = async () => {
-      const data = await listarOrganizaciones();
-      setOrganizaciones(data.response);
+      let data = await listarOrganizaciones();
+      let listado = data.response.sort((a,b) => (a.pendienteAprobacion < b.pendienteAprobacion) ? 
+        1 : ((b.pendienteAprobacion < a.pendienteAprobacion) ? -1 : 0));
+      setOrganizaciones(listado);
     }
     getOrganizaciones();
   }, []);

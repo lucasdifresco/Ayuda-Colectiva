@@ -13,6 +13,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
+import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import BookIcon from "@material-ui/icons/Book";
 import EventIcon from "@material-ui/icons/Event";
@@ -39,6 +40,9 @@ const styles = theme => ({
   noDecoration: {
     textDecoration: "none !important"
   },
+  iconStyle: {
+    color: theme.palette.primary.main,
+  }
 });
 
 function NavBar(props) {
@@ -56,22 +60,22 @@ function NavBar(props) {
     {
       link: "/ComoFunciona",
       name: "Cómo funciona",
-      icon: <HomeIcon className="text-white" />
+      icon: <HomeIcon className={classes.iconStyle} />
     },
     {
       link: "/organizaciones",
       name: "Organizaciones",
-      icon: <EventIcon className="text-white" />
+      icon: <HomeWorkIcon className={classes.iconStyle} />
     },
     {
       name: "Registrarse",
       onClick: openRegisterDialog,
-      icon: <HowToRegIcon className="text-white" />
+      icon: <HowToRegIcon className={classes.iconStyle} />
     },
     {
       name: "Login",
       onClick: openLoginDialog,
-      icon: <LockOpenIcon className="text-white" />
+      icon: <LockOpenIcon className={classes.iconStyle} />
     }
   ];
   return (
@@ -108,7 +112,7 @@ function NavBar(props) {
                 onClick={handleMobileDrawerOpen}
                 aria-label="Open Navigation"
               >
-                <MenuIcon color="primary" />
+                <MenuIcon style={{color: theme.palette.secondary.light}} />
               </IconButton>
             </Hidden>
             <Hidden smDown>

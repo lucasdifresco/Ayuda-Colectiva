@@ -94,21 +94,35 @@ body{
     }
 }
 
-@media screen and (max-width: 868px){
-    .blog-post{
-      max-width: 70rem;
-    }
+.imgWrapper {
+    height: 150px;
+    border-right: 1px solid #C3C3C3;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 600px){
     .blog-post{
        padding: 2.5rem;
        flex-direction: column;
+       height: auto;
+       align-items: center;
+       justify-items: center;
     }
 
     .blog-post__img{
-        min-width: 100%;
-        max-width: 100%;
-        transform: translate(0, -8rem);
+        min-width: 80%;
+        max-width: 80%;
+        margin: auto;
+    }
+
+    .imgWrapper {
+        border-right: none;
+    }
+
+    .textWrapper {
+        border-top: 1px solid #C3C3C3;
+    }
+
+    .textWrapper p {
+        font-size: 1.2rem;
     }
 }

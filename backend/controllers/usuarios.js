@@ -81,7 +81,8 @@ module.exports = {
             organismoOtorgamiento: req.body.organismoPersoneriaJuridica,
             fechaOtorgamiento: req.body.fechaOtorgamientoPersoneriaJuridica,
             paginaWeb: req.body.paginaWeb,
-            cuit: req.body.cuit
+            cuit: req.body.cuit,
+            pendienteAprobacion: true
         }
 
         return usuarios
@@ -93,7 +94,7 @@ module.exports = {
                         .create({
                             nombre: parametros.nombre,
                             mision: "Prueba",
-                            aprobacion: process.env.ORGANIZACION_APROBACION_PENDIENTE,
+                            aprobacion: process.env.ORGANIZACION_APROBACION_RECHAZADO,
                             fechaDeAlta: new Date(Date.now()).toISOString(),
                             direccion: parametros.direccion,
                             provincia: parametros.provincia,
@@ -101,7 +102,8 @@ module.exports = {
                             nroPersoneriaJuridica: parametros.personeriaJuridica,
                             organismoPersoneriaJuridica: parametros.organismoOtorgamiento,
                             fechaOtorgamientoPersoneriaJuridica: null,
-                            CUIT: parametros.cuit
+                            CUIT: parametros.cuit,
+                            pendienteAprobacion: parametros.pendienteAprobacion
 
                         })
                         .then(result => {
@@ -240,14 +242,15 @@ module.exports = {
     aprobarOrganizacion(req, res) {
         var parametros = {
             id: req.body.id,
-            aprobacion: req.body.aprobacion
+            aprobacion: req.body.aprobacion,
+            pendienteAprobacion: 0
         }
         return organizaciones
             .findOne({ where: { id: parametros.id } })
             .then(result => {
-                if (parametros.aprobacion == null) { parametros.aprobacion = !result.aprobacion; }
+                if (parametros.aprobacion !== null) { parametros.aprobacion = !result.aprobacion; }
                 result
-                    .update({ aprobacion: parametros.aprobacion })
+                    .update({ aprobacion: parametros.aprobacion, pendienteAprobacion: parametros.pendienteAprobacion })
                     .then(result => res.status(200).send({ message: "La organizacion se a modificado correctamente.", result }))
                     .catch(error => res.status(400).send({ message: "Ocurrio un error al intentar modificar la organizacion.", error }))
 

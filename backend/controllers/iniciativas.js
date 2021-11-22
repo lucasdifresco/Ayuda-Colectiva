@@ -98,7 +98,12 @@ module.exports = {
     {
         var parametros = { }
         return iniciativas
-            .findAll()
+            .findAll({ 
+                include: [{
+                    all: true,
+                    nested: true
+                }]
+            })
             .then(result => res.status(200).send(result))
             .catch(error => res.status(400).send({ message: "Error al intentar buscar las iniciativas.", error }))
      },

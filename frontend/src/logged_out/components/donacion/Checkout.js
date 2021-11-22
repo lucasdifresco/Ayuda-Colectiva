@@ -12,10 +12,9 @@ const styles = theme => ({
     padding: "50px",
     margin: "auto",
     marginTop: "100px",
-   // padding: "0 16px",
-  /*  [theme.breakpoints.up('sm')]: {
-      padding: "0 128px",
-    },*/
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: "80%",
+    },
   },
   mainTitle: {
     fontSize: '1.8rem',
