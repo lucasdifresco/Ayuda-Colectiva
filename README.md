@@ -1,5 +1,5 @@
-# projectoseminario
-Proyecto para la materia de seminario uno.
+# Ayuda Colectiva
+Proyecto para la materia de Seminario de Integración Profesional I.
 
 Importante: para mantener un orden en la gestion de codigo, vamos a trabajar en branchs por feature y todo cambio a master debe ser enviado mediante un PR (Pull Request)
 
